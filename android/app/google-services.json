@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "529166373907",
+    "firebase_url": "https://skintel-ff3e2.firebaseio.com",
+    "project_id": "skintel-ff3e2",
+    "storage_bucket": "skintel-ff3e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529166373907:android:39dd501b5e34b287f3dbe6",
+        "android_client_info": {
+          "package_name": "com.skintel.skintelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529166373907-5f1vpom3umacqnqn24gk80920pdq0jj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFdq8w_LA3uFxAyoexHl19oxr_JUBF6-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529166373907-5f1vpom3umacqnqn24gk80920pdq0jj3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "529166373907-3oj71jsf4h05hq0bhjt7srjioo774mas.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.skintel.skintelapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
