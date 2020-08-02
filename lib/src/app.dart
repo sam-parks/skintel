@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:skintel/config.dart';
 import 'package:skintel/src/locator.dart';
+import 'package:skintel/src/ui/pages/articles_page.dart';
+import 'package:skintel/src/ui/pages/settings_page.dart';
+import 'package:skintel/src/ui/pages/uv_page.dart';
 
 class MyApp extends StatefulWidget {
   MyApp(this.config);
@@ -41,13 +44,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [UVPage(), ArticlesPage(), SettingsPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +54,23 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+        child: _pages.elementAt(_selectedIndex),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (i) async {
+            setState(() {
+              _selectedIndex = i;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                title: Text("UV"), icon: Icon(Icons.wb_sunny)),
+            BottomNavigationBarItem(
+                title: Text("Articles"), icon: Icon(Icons.article)),
+            BottomNavigationBarItem(
+                title: Text("Settings"), icon: Icon(Icons.settings)),
+          ]),
     );
   }
 }
