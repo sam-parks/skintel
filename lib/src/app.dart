@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skintel/config.dart';
 import 'package:skintel/src/locator.dart';
+import 'package:skintel/src/services/uv_service.dart';
 
 class MyApp extends StatefulWidget {
   MyApp(this.config);
@@ -16,6 +17,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     locator.registerSingleton<Config>(widget.config);
     registerLocatorItems(locator.get<Config>().openUVAPIKey);
+    locator.get<UVService>().getUVFromLocation('-33.34', '115.34');
   }
 
   @override
