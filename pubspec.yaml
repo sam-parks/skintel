@@ -56,6 +56,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/skintel-logo-basic.png"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -73,6 +78,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
