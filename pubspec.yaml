@@ -23,6 +23,33 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.4.0+9
+  firebase_analytics: ^5.0.2
+  firebase_auth: ^0.14.0+5
+  cloud_firestore: ^0.12.9+5
+
+  # GEOLOCATION
+  geolocator: ^5.3.2+2
+  geocoder: ^0.2.1
+  location: ^3.0.2
+
+
+  # FORMATTING
+  auto_size_text: ^2.1.0
+  intl: ^0.16.1
+
+  # Utilities
+  shared_preferences: ^0.5.8
+  get_it: ^3.1.0
+  url_launcher: ^5.4.2
+  flutter_launcher_icons: ^0.7.5
+  dio: ^3.0.9
+
+
+  #BLOC and PROVIDER
+  flutter_bloc: ^4.0.0
+  provider: ^4.0.4
+  rxdart: ^0.23.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -34,10 +61,7 @@ dev_dependencies:
     sdk: flutter
 
   # Firebase
-  firebase_core: ^0.4.0+9
-  firebase_analytics: ^5.0.2
-  firebase_auth: ^0.14.0+5
-  cloud_firestore: ^0.12.9+5
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
