@@ -1,3 +1,4 @@
+import 'package:animated_splash/animated_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:skintel/config.dart';
 import 'package:skintel/src/locator.dart';
@@ -14,6 +15,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Map<dynamic, Widget> returnValueAndHomeScreen = {
+    1: MyHomePage(title: 'Flutter Demo Home Page')
+  };
+
   @override
   void initState() {
     super.initState();
@@ -26,10 +31,18 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        primaryColor: Colors.yellowAccent,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: AnimatedSplash(
+        imagePath: 'assets/images/sun_loading.gif',
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
+        customFunction: () => true,
+        duration: 6000,
+        type: AnimatedSplashType.StaticDuration,
+        outputAndHome: returnValueAndHomeScreen,
+      ),
     );
   }
 }
