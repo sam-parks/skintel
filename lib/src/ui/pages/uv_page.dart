@@ -23,6 +23,7 @@ class _UVPageState extends State<UVPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(_cityModel.city),
+        if (_cityModel.lngUser != null) Text(_cityModel.latUser),
         Container(
             child: Center(
           child: Padding(
