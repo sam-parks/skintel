@@ -47,7 +47,11 @@ dependencies:
   url_launcher: ^5.4.2
   flutter_launcher_icons: ^0.7.5
   dio: ^3.0.9
-  flutter_svg: ^0.17.3+1
+  flutter_svg: ^0.18.0
+  page_transition: ^1.1.6
+  syncfusion_flutter_charts: ^18.2.54
+  flutter_snake_navigationbar: ^0.4.0+1
+  flutter_speed_dial: ^1.2.5
 
 
   #BLOC and PROVIDER

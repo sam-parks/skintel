@@ -38,12 +38,11 @@ class UVService {
 
   getUVFromLocation(String lat, String lng) async {
     try {
-      DateTime currentDate = DateTime.now();
-      print(currentDate.toString());
       Response response = await Dio().get("https://api.openuv.io/api/v1/uv",
           queryParameters: {'lat': lat, 'lng': lng},
           options: Options(headers: {"x-access-token": openUVKey}));
-      print(response);
+
+      return response.data['result'];
     } catch (e) {
       print(e);
     }

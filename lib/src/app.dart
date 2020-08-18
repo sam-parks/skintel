@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:skintel/config.dart';
 import 'package:skintel/src/locator.dart';
 import 'package:skintel/src/ui/pages/articles_page.dart';
-import 'package:skintel/src/ui/pages/settings_page.dart';
 import 'package:skintel/src/ui/pages/uv_page.dart';
+import 'package:skintel/src/ui/widgets/animated_splash.dart';
 
 class MyApp extends StatefulWidget {
   MyApp(this.config);
@@ -29,15 +31,16 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: AnimatedSplash(
+          duration: 6000,
+          imagePath: 'assets/images/sun_loading.gif',
+          home: MyHomePage()),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -45,32 +48,81 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = [UVPage(), ArticlesPage(), SettingsPage()];
+  final List<Widget> _pages = [UVPage(), ArticlesPage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: (i) async {
-            setState(() {
-              _selectedIndex = i;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-                title: Text("UV"), icon: Icon(Icons.wb_sunny)),
-            BottomNavigationBarItem(
-                title: Text("Articles"), icon: Icon(Icons.article)),
-            BottomNavigationBarItem(
-                title: Text("Settings"), icon: Icon(Icons.settings)),
-          ]),
+      bottomNavigationBar: SnakeNavigationBar(
+        selectedItemColor: Colors.amber,
+        currentIndex: _selectedIndex,
+        onPositionChanged: (index) => setState(() => _selectedIndex = index),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.wb_sunny,
+              color: Colors.amber,
+            ),
+            label: 'UV',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.article,
+                color: Colors.amber,
+              ),
+              label: 'Article'),
+        ],
+      ),
+      floatingActionButton: SpeedDial(
+        // both default to 16
+        marginRight: 18,
+        marginBottom: 20,
+        animatedIcon: AnimatedIcons.menu_close,
+        animatedIconTheme: IconThemeData(size: 22.0),
+        // this is ignored if animatedIcon is non null
+        // child: Icon(Icons.add),
+        visible: _selectedIndex == 0,
+        // If true user is forced to close dial manually
+        // by tapping main button and overlay is not rendered.
+        closeManually: false,
+        curve: Curves.bounceIn,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        onOpen: () => print('OPENING DIAL'),
+        onClose: () => print('DIAL CLOSED'),
+        tooltip: 'Speed Dial',
+        heroTag: 'speed-dial-hero-tag',
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 8.0,
+        shape: CircleBorder(),
+        children: [
+          SpeedDialChild(
+              child: Icon(Icons.accessibility),
+              backgroundColor: Colors.red,
+              label: 'First',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => print('FIRST CHILD')),
+          SpeedDialChild(
+            child: Icon(Icons.brush),
+            backgroundColor: Colors.blue,
+            label: 'Second',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('SECOND CHILD'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.keyboard_voice),
+            backgroundColor: Colors.green,
+            label: 'Third',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('THIRD CHILD'),
+          ),
+        ],
+      ),
     );
   }
 }

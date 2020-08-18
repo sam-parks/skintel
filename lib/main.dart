@@ -4,18 +4,33 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skintel/config.dart';
 import 'package:skintel/src/app.dart';
 import 'package:skintel/src/data/city_model.dart';
+import 'package:skintel/src/data/skin_model.dart';
+import 'package:skintel/src/data/uv_model.dart';
+import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   String city = await getSavedCity();
+  int skinColorIndex = await getSavedSkinColor();
+  SyncfusionLicense.registerLicense(
+      'NT8mJyc2IWhia31hfWN9Z2doYmF8YGJ8ampqanNiYmlmamlmanMDHmgjMiE4ICAyEyY1P302NyY=');
   runApp(ChangeNotifierProvider(
       create: (BuildContext context) => CityModel(city),
-      child: MyApp(_ProdConfig())));
+      child: ChangeNotifierProvider(
+          create: (BuildContext context) => SkinColorModel(skinColorIndex),
+          child: ChangeNotifierProvider(
+              create: (BuildContext context) => UVModel(),
+              child: MyApp(_ProdConfig())))));
 }
 
 getSavedCity() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getString('city') ?? '';
+}
+
+getSavedSkinColor() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getInt('skinColorIndex') ?? null;
 }
 
 class _ProdConfig extends Config {
