@@ -28,7 +28,6 @@ class UVService {
     LocationData locationData;
     try {
       locationData = await location.getLocation();
-      print(locationData.latitude);
     } catch (e) {
       print(e);
     }

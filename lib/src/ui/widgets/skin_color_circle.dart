@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skintel/src/app.dart';
 
 class SkinColorCircle extends StatefulWidget {
   SkinColorCircle(
@@ -31,7 +32,7 @@ class _SkinColorCircleState extends State<SkinColorCircle> {
         duration: Duration(milliseconds: 500),
         child: CircleAvatar(
           radius: _radius,
-          // backgroundColor: determineSkinColor(widget.skinColorIndex),
+          backgroundColor: determineSkinColor(widget.skinColorIndex),
         ),
       ),
     );

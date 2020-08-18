@@ -25,7 +25,12 @@ void main() async {
 
 getSavedCity() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getString('city') ?? '';
+  return prefs.getString('city') ?? null;
+}
+
+getSavedSkinColorIndex() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getInt('skinColorIndex');
 }
 
 getSavedSkinColor() async {

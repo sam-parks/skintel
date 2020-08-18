@@ -115,8 +115,8 @@ class _UVPageState extends State<UVPage> {
       cityModel.updateCity(placesDetails.result.name, location.lat.toString(),
           location.lng.toString());
 
-      dynamic result =
-          await _uvService.getUVFromLocation(cityModel.lat, cityModel.lng);
+      dynamic result = await _uvService.getUVFromLocation(
+          cityModel.latCity, cityModel.lngCity);
       uvModel.updateUVData(result['uv'], result['uv_max']);
     }
   }
