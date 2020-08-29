@@ -8,7 +8,8 @@ import 'package:skintel/src/data/city_model.dart';
 import 'package:skintel/src/data/uv_model.dart';
 import 'package:skintel/src/locator.dart';
 import 'package:skintel/src/services/uv_service.dart';
-import 'package:skintel/src/ui/widgets/uv_chart.dart';
+import 'package:skintel/src/ui/style.dart';
+import 'package:skintel/src/ui/widgets/uv_info.dart';
 
 class UVPage extends StatefulWidget {
   UVPage({Key key}) : super(key: key);
@@ -25,75 +26,103 @@ class _UVPageState extends State<UVPage> {
   Widget build(BuildContext context) {
     CityModel _cityModel = Provider.of<CityModel>(context);
     UVModel _uvModel = Provider.of<UVModel>(context);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
       children: [
-        Row(
-          children: [
-            Flexible(
+        Container(
+          color: (_uvModel.currentUV == null)
+              ? AppColors.sky_blue
+              : generateBackgroundColor(_uvModel.currentUV),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
                 child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Image.asset(
-                'assets/images/sun.png',
-                height: 100,
+                  padding: const EdgeInsets.only(left: 30, top: 20, bottom: 20),
+                  child: _uvModel.currentUV == 0.0
+                      ? SvgPicture.asset('assets/images/moon.svg', height: 100)
+                      : Image.asset(
+                          'assets/images/sun.png',
+                          height: 100,
+                        ),
+                ),
               ),
-            )),
-            GestureDetector(
-              onTap: () async {
-                _selectCity(_cityModel, _uvModel);
-              },
-              child: Column(
+              Column(
                 children: [
                   Text(
                     'Location',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: _uvModel.currentUV == 0.0
+                            ? Colors.white
+                            : Colors.black),
                   ),
-                  Text(_cityModel.city),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 120),
+                    child: Text(
+                      "Plase type in your current city.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
-        ),
-        Container(
-            child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: _uvModel.maxUV == null || _uvModel.currentUV == null
-                ? Stack(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          _selectCity(_cityModel, _uvModel);
-                        },
-                        child: TextFormField(
-                          enabled: false,
-                          decoration: InputDecoration(hintText: "Enter a City"),
-                        ),
-                      ),
-                      Positioned(
-                        right: 10,
-                        top: 12,
-                        child: Icon(
-                          Icons.map,
-                          color: Colors.amber,
-                        ),
-                      )
-                    ],
-                  )
-                : Container(
-                    height: 130,
-                    child: UVChart(
-                        sunrise: UVData(0, 0),
-                        sunset: UVData(0, 0),
-                        maxUV: _uvModel.maxUV),
+              Spacer(),
+              Stack(
+                children: [
+                  (_uvModel.currentUV == null)
+                      ? SvgPicture.asset(
+                          'assets/images/park.svg',
+                          alignment: Alignment.bottomCenter,
+                        )
+                      : generateBackgroundPicture(_uvModel.currentUV),
+                  Positioned(
+                    top: -15,
+                    child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 32,
+                            right: 32,
+                          ),
+                          child: GestureDetector(
+                            onTap: () async {
+                              _selectCity(_cityModel, _uvModel);
+                            },
+                            child: TextField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                border: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                hintStyle: _uvModel.currentUV == 0.0
+                                    ? TextStyle(color: Colors.white)
+                                    : TextStyle(color: Colors.black),
+                                hintText: "Enter a City...",
+                                contentPadding: const EdgeInsets.only(left: 10),
+                              ),
+                            ),
+                          ),
+                        )),
                   ),
+                ],
+              )
+            ],
           ),
-        )),
-        Spacer(),
-        SvgPicture.asset(
-          'assets/images/park.svg',
-          alignment: Alignment.bottomCenter,
-        )
+        ),
+        if (_cityModel.city != null && _uvModel.currentUV != null)
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).size.height * .1),
+              child: UVInfo(),
+            ),
+          )
       ],
     );
   }
@@ -117,7 +146,46 @@ class _UVPageState extends State<UVPage> {
 
       dynamic result = await _uvService.getUVFromLocation(
           cityModel.latCity, cityModel.lngCity);
-      uvModel.updateUVData(result['uv'], result['uv_max']);
+
+      if (result['uv'] == 0) {
+        result['uv'] = 0.0;
+      }
+      if (result['uv_max'] == 0) {
+        result['uv_max'] = 0.0;
+      }
+      uvModel.updateUVData(
+          result['uv'],
+          result['uv_max'],
+          DateTime.parse(result['sun_info']['sun_times']['sunrise']),
+          DateTime.parse(result['sun_info']['sun_times']['sunset']),
+          DateTime.parse(result['uv_max_time']).hour);
     }
+  }
+
+  generateBackgroundColor(double currentUV) {
+    if (currentUV == 0.0) {
+      return AppColors.night;
+    } else if (currentUV > 6.0) {
+      return AppColors.desert;
+    }
+    return AppColors.sky_blue;
+  }
+
+  generateBackgroundPicture(double currentUV) {
+    if (currentUV == 0.0) {
+      return SvgPicture.asset(
+        'assets/images/night_scene.svg',
+        alignment: Alignment.bottomCenter,
+      );
+    } else if (currentUV > 6.0) {
+      return SvgPicture.asset(
+        'assets/images/desert_scene.svg',
+        alignment: Alignment.bottomCenter,
+      );
+    }
+    return SvgPicture.asset(
+      'assets/images/park.svg',
+      alignment: Alignment.bottomCenter,
+    );
   }
 }

@@ -20,4 +20,7 @@ class AppColors {
   static const Color skin2 = Color.fromRGBO(184, 128, 79, 1);
   static const Color skin3 = Color.fromRGBO(147, 86, 41, 1);
   static const Color skin4 = Color.fromRGBO(75, 53, 43, 1);
+  static const Color sky_blue = Color.fromRGBO(227, 239, 242, 1);
+  static const Color night = Color.fromRGBO(62, 61, 86, 1);
+  static const Color desert = Color.fromRGBO(255, 242, 222, 1);
 }

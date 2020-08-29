@@ -77,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return _skinColorModel.skinColorIndex == null
         ? SkinColorSelectionPage()
         : Scaffold(
+            resizeToAvoidBottomInset: false,
             body: Center(
               child: _pages.elementAt(_selectedIndex),
             ),
@@ -123,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 : Container(),
             bottomNavigationBar: SnakeNavigationBar(
+                selectedItemColor: Colors.amber,
                 currentIndex: _selectedIndex,
                 onPositionChanged: (i) async {
                   setState(() {
@@ -234,24 +236,20 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: MaterialButton(
-              color: Colors.amber,
-              onPressed: () {
-                _skinColorModel.updateSkinColorIndex(skinColorIndexSelected);
-              },
-              child: Text("Select skin color"),
-            ),
-          ),
           Spacer(),
-          Container(
-            padding: const EdgeInsets.only(bottom: 30),
-            width: MediaQuery.of(context).size.width * .7,
-            height: 40,
-            decoration: BoxDecoration(
-                color: determineSkinColor(skinColorIndexSelected),
-                borderRadius: BorderRadius.circular(8.0)),
+          GestureDetector(
+            onTap: () {
+              _skinColorModel.updateSkinColorIndex(skinColorIndexSelected);
+            },
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 30),
+              width: MediaQuery.of(context).size.width * .7,
+              height: 40,
+              child: Text("Select skin color"),
+              decoration: BoxDecoration(
+                  color: determineSkinColor(skinColorIndexSelected),
+                  borderRadius: BorderRadius.circular(8.0)),
+            ),
           ),
           Spacer()
         ],
