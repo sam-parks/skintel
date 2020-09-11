@@ -34,10 +34,18 @@ class _UVPageState extends State<UVPage> {
               : generateBackgroundColor(_uvModel.currentUV),
           child: Column(
             children: [
-              Align(
+              /*   Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 20, bottom: 20),
+                  padding: const EdgeInsets.only(left: 10, top: 20, bottom: 20),
+                  child: SvgPicture.asset('assets/images/skintel_logo.svg'),
+                ),
+              ), */
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(right: 30, top: 20, bottom: 20),
                   child: _uvModel.currentUV == 0.0
                       ? SvgPicture.asset('assets/images/moon.svg', height: 100)
                       : Image.asset(

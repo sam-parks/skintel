@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       home: AnimatedSplash(
         imagePath: 'assets/images/sun_loading.gif',
         home: MyHomePage(),
-        duration: 6500,
+        duration: 5500,
       ),
     );
   }
@@ -149,7 +149,7 @@ class SkinColorSelectionPage extends StatefulWidget {
 }
 
 class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
-  int skinColorIndexSelected = 0;
+  int skinColorIndexSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -157,17 +157,20 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
     return Scaffold(
       body: Column(
         children: [
-          ClipOval(
+          ClipRRect(
             child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: determineSkinColor(skinColorIndexSelected),
+              ),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * .5,
-              color: determineSkinColor(skinColorIndexSelected),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Skin Tone",
+              determineSkinText(skinColorIndexSelected),
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 34,
@@ -177,7 +180,7 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40),
             child: Text(
-              "Please select a skin tone that best represents you.",
+              determineSkinDescription(skinColorIndexSelected),
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black),
             ),
@@ -242,10 +245,14 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
               _skinColorModel.updateSkinColorIndex(skinColorIndexSelected);
             },
             child: Container(
-              padding: const EdgeInsets.only(bottom: 30),
+              margin: const EdgeInsets.only(bottom: 30),
               width: MediaQuery.of(context).size.width * .7,
-              height: 40,
-              child: Text("Select skin color"),
+              height: 50,
+              child: Center(
+                  child: Text(
+                "Continue",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              )),
               decoration: BoxDecoration(
                   color: determineSkinColor(skinColorIndexSelected),
                   borderRadius: BorderRadius.circular(8.0)),
@@ -255,6 +262,52 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
         ],
       ),
     );
+  }
+}
+
+String determineSkinText(int index) {
+  switch (index) {
+    case 0:
+      return "Very Fair";
+      break;
+    case 1:
+      return "Fair";
+      break;
+
+    case 2:
+      return "Medium";
+      break;
+    case 3:
+      return "Olive";
+      break;
+    case 4:
+      return "Dark";
+      break;
+    default:
+      return "Skin Tone";
+  }
+}
+
+String determineSkinDescription(int index) {
+  switch (index) {
+    case 0:
+      return "Always burns, never tans";
+      break;
+    case 1:
+      return "Sometimes mild burn, tans uniformly";
+      break;
+
+    case 2:
+      return "Burns minimally, always tans well";
+      break;
+    case 3:
+      return "Very rarely burns, tans very easily";
+      break;
+    case 4:
+      return "Never burns";
+      break;
+    default:
+      return "Please select a skin tone that best represents you.";
   }
 }
 
@@ -277,6 +330,6 @@ Color determineSkinColor(int index) {
       return AppColors.skin4;
       break;
     default:
-      return AppColors.skin0;
+      return Colors.grey[200];
   }
 }
