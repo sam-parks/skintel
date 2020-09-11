@@ -9,10 +9,19 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class UVChart extends StatefulWidget {
   const UVChart(
-      {Key key, this.sunrise, this.sunset, this.maxUV, this.uvMaxHour})
+      {Key key,
+      this.sunrise,
+      this.sunset,
+      this.maxUV,
+      this.uvMaxHour,
+      this.sunriseData,
+      this.sunsetData})
       : super(key: key);
-  final UVData sunrise;
-  final UVData sunset;
+
+  final DateTime sunrise;
+  final DateTime sunset;
+  final UVData sunriseData;
+  final UVData sunsetData;
   final double maxUV;
   final int uvMaxHour;
 
@@ -32,14 +41,14 @@ class _UVChartState extends State<UVChart> {
   }
 
   SfCartesianChart getAnimationSplineChart() {
+    double max = widget.sunset.difference(widget.sunrise).inHours.toDouble();
+
     return SfCartesianChart(
         plotAreaBorderWidth: 0,
         primaryXAxis: NumericAxis(
           isVisible: false,
-          minimum: widget.sunrise.hour.toDouble(),
-          maximum: widget.sunset.hour.toDouble() == 0.0
-              ? 24.0
-              : widget.sunset.hour.toDouble(),
+          minimum: 0,
+          maximum: max,
         ),
         primaryYAxis: NumericAxis(
           maximumLabels: 2,
@@ -53,10 +62,15 @@ class _UVChartState extends State<UVChart> {
   }
 
   List<SplineAreaSeries<UVData, int>> getDefaultSplineSeries() {
+    int uvMaxHour =
+        widget.uvMaxHour - widget.sunset.difference(widget.sunrise).inHours;
+    if (uvMaxHour < 0) {
+      uvMaxHour += 12;
+    }
     List<UVData> _chartData = [
-      widget.sunrise,
-      UVData(widget.uvMaxHour, widget.maxUV),
-      widget.sunset
+      widget.sunriseData,
+      UVData(uvMaxHour, widget.maxUV),
+      widget.sunsetData
     ];
     return <SplineAreaSeries<UVData, int>>[
       SplineAreaSeries<UVData, int>(
