@@ -41,14 +41,13 @@ class _UVChartState extends State<UVChart> {
   }
 
   SfCartesianChart getAnimationSplineChart() {
-    double max = widget.sunset.difference(widget.sunrise).inHours.toDouble();
 
     return SfCartesianChart(
         plotAreaBorderWidth: 0,
         primaryXAxis: NumericAxis(
           isVisible: false,
-          minimum: 0,
-          maximum: max,
+          minimum: widget.sunset.hour.toDouble(),
+          maximum: widget.sunrise.hour.toDouble(),
         ),
         primaryYAxis: NumericAxis(
           maximumLabels: 2,
@@ -62,14 +61,9 @@ class _UVChartState extends State<UVChart> {
   }
 
   List<SplineAreaSeries<UVData, int>> getDefaultSplineSeries() {
-    int uvMaxHour =
-        widget.uvMaxHour - widget.sunset.difference(widget.sunrise).inHours;
-    if (uvMaxHour < 0) {
-      uvMaxHour += 12;
-    }
     List<UVData> _chartData = [
       widget.sunriseData,
-      UVData(uvMaxHour, widget.maxUV),
+      UVData(widget.uvMaxHour, widget.maxUV),
       widget.sunsetData
     ];
     return <SplineAreaSeries<UVData, int>>[

@@ -14,9 +14,8 @@ class UVInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     UVModel uvModel = Provider.of<UVModel>(context);
     CityModel cityModel = Provider.of<CityModel>(context);
-    UVData sunrise = UVData(0, 0);
-    UVData sunset =
-        UVData(uvModel.sunset.difference(uvModel.sunrise).inHours, 0);
+    UVData sunrise = UVData(uvModel.sunrise.hour, 0);
+    UVData sunset = UVData(uvModel.sunset.hour, 0);
     return Stack(
       children: [
         Container(

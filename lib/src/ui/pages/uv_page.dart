@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:skintel/config.dart';
 import 'package:skintel/src/data/city_model.dart';
@@ -162,11 +163,19 @@ class _UVPageState extends State<UVPage> {
         result['uv_max'] = 0.0;
       }
       uvModel.updateUVData(
-          result['uv'],
-          result['uv_max'],
-          DateTime.parse(result['sun_info']['sun_times']['sunrise']),
-          DateTime.parse(result['sun_info']['sun_times']['sunset']),
-          DateTime.parse(result['uv_max_time']).hour);
+        result['uv'],
+        result['uv_max'],
+        DateFormat("yyyy-MM-ddTHH:mm:ss.SSSZ")
+            .parse(result['sun_info']['sun_times']['sunrise'], true)
+            .toLocal(),
+        DateFormat("yyyy-MM-ddTHH:mm:ss.SSSZ")
+            .parse(result['sun_info']['sun_times']['sunset'], true)
+            .toLocal(),
+        DateFormat("yyyy-MM-ddTHH:mm:ss.SSSZ")
+            .parse(result['uv_max_time'], true)
+            .toLocal()
+            .hour,
+      );
     }
   }
 
