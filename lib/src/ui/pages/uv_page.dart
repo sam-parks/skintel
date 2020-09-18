@@ -35,13 +35,6 @@ class _UVPageState extends State<UVPage> {
               : generateBackgroundColor(_uvModel.currentUV),
           child: Column(
             children: [
-              /*   Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 20, bottom: 20),
-                  child: SvgPicture.asset('assets/images/skintel_logo.svg'),
-                ),
-              ), */
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
@@ -131,7 +124,14 @@ class _UVPageState extends State<UVPage> {
                   EdgeInsets.only(top: MediaQuery.of(context).size.height * .1),
               child: UVInfo(),
             ),
-          )
+          ),
+        Padding(
+          padding: const EdgeInsets.only(left: 10, top: 20),
+          child: Image.asset(
+            'assets/images/skintel_white.png',
+            height: 60,
+          ),
+        ),
       ],
     );
   }
