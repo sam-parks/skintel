@@ -54,7 +54,8 @@ class _UVPageState extends State<UVPage> {
                     'Location',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 30,
+                        fontFamily: kFontFamilyBold,
+                        fontSize: 40,
                         color: _uvModel.currentUV == 0.0
                             ? Colors.white
                             : Colors.black),
@@ -65,7 +66,10 @@ class _UVPageState extends State<UVPage> {
                     child: Text(
                       "Plase type in your current city.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontFamily: kFontFamilyNormal,
+                      ),
                     ),
                   ),
                 ],
@@ -95,15 +99,21 @@ class _UVPageState extends State<UVPage> {
                             child: TextField(
                               enabled: false,
                               decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                border: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
+                                disabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: _uvModel.currentUV == 0.0
+                                            ? Colors.white
+                                            : Colors.black,
+                                        width: 1.2)),
                                 hintStyle: _uvModel.currentUV == 0.0
-                                    ? TextStyle(color: Colors.white)
-                                    : TextStyle(color: Colors.black),
+                                    ? TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: kFontFamilyNormal,
+                                      )
+                                    : TextStyle(
+                                        color: Colors.grey,
+                                        fontFamily: kFontFamilyNormal,
+                                      ),
                                 hintText: "Enter a City...",
                                 contentPadding: const EdgeInsets.only(left: 10),
                               ),

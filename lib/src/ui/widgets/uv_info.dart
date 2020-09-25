@@ -22,7 +22,9 @@ class UVInfo extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 40.0),
           height: MediaQuery.of(context).size.height * .6,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(8)),
+              border: Border.all(color: Colors.amber),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8)),
           child: Column(
             children: [
               Padding(

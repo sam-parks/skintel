@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 ThemeData kAppTheme = ThemeData();
 
-const String kDefaultFontFamily = "ProductSans";
+const String kFontFamilyNormal = 'Gibson';
+const String kFontFamilyBold = 'GibsonSemi';
 
 class TextStyles {
   static final TextStyle kDefaultTextStyle = TextStyle(
-    fontFamily: 'ProductSans',
+    fontFamily: 'Gibson',
     fontSize: 16,
     letterSpacing: 1.2,
   );
