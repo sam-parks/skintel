@@ -172,6 +172,7 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
             child: Text(
               determineSkinText(skinColorIndexSelected),
               style: TextStyle(
+                  fontFamily: kFontFamilyBold,
                   color: Colors.black,
                   fontSize: 34,
                   fontWeight: FontWeight.bold),
@@ -182,7 +183,8 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
             child: Text(
               determineSkinDescription(skinColorIndexSelected),
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black),
+              style:
+                  TextStyle(color: Colors.black, fontFamily: kFontFamilyNormal),
             ),
           ),
           Container(
@@ -251,7 +253,10 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
               child: Center(
                   child: Text(
                 "Continue",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: kFontFamilyNormal),
               )),
               decoration: BoxDecoration(
                   color: determineSkinColor(skinColorIndexSelected),
