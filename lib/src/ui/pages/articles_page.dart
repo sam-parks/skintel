@@ -23,23 +23,35 @@ class _ArticlesPageState extends State<ArticlesPage> {
             itemCount: articlesModel.articles.length,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Articles',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: kFontFamilyBold,
-                          fontSize: 40,
-                          color: Colors.black),
+                return Stack(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Image.asset(
+                        'assets/images/skintel_white.png',
+                        height: 60,
+                      ),
                     ),
-                  ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Articles',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: kFontFamilyBold,
+                              fontSize: 40,
+                              color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
               return GestureDetector(
                 onTap: () async {
-                  String url = articlesModel.articles[index].url;
+                  String url = articlesModel.articles[index].url.trim();
 
                   if (await canLaunch(url)) {
                     await launch(url);
@@ -68,13 +80,6 @@ class _ArticlesPageState extends State<ArticlesPage> {
                 ),
               );
             }),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 10, top: 20),
-        child: Image.asset(
-          'assets/images/skintel_white.png',
-          height: 60,
-        ),
       ),
     ]);
   }
