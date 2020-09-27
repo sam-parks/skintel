@@ -3,9 +3,11 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:skintel/config.dart';
+import 'package:skintel/src/data/article.dart';
 import 'package:skintel/src/data/city_model.dart';
 import 'package:skintel/src/data/skin_model.dart';
 import 'package:skintel/src/locator.dart';
+import 'package:skintel/src/services/article_service.dart';
 import 'package:skintel/src/services/uv_service.dart';
 import 'package:skintel/src/ui/pages/articles_page.dart';
 import 'package:skintel/src/ui/pages/uv_page.dart';
@@ -23,7 +25,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  CityModel _cityModel;
+  ArticlesModel _articlesModel;
   UVService _uvService;
+  ArticleService _articleService;
 
   @override
   void initState() {
@@ -31,17 +36,12 @@ class _MyAppState extends State<MyApp> {
     locator.registerSingleton<Config>(widget.config);
     registerLocatorItems(locator.get<Config>().openUVAPIKey);
     _uvService = locator.get();
-    _getUsersLocation();
-  }
+    _articleService = locator.get();
 
-  _getUsersLocation() async {
-    LocationData locationData = await _uvService.getCurrentLocation();
-    if (locationData.latitude == null) {
-      return;
-    }
-    CityModel _cityModel = Provider.of<CityModel>(context, listen: false);
-    _cityModel.updateUserLoc(
-        locationData.latitude.toString(), locationData.longitude.toString());
+    _cityModel = Provider.of<CityModel>(context, listen: false);
+    _articlesModel = Provider.of<ArticlesModel>(context, listen: false);
+    _getUsersLocation();
+    _getArticles();
   }
 
   @override
@@ -57,6 +57,22 @@ class _MyAppState extends State<MyApp> {
         duration: 5500,
       ),
     );
+  }
+
+  _getUsersLocation() async {
+    LocationData locationData = await _uvService.getCurrentLocation();
+    if (locationData.latitude == null) {
+      return;
+    }
+
+    _cityModel.updateUserLoc(
+        locationData.latitude.toString(), locationData.longitude.toString());
+  }
+
+  _getArticles() async {
+    List<Article> articles = await _articleService.getArticles();
+
+    _articlesModel.updateArticles(articles);
   }
 }
 

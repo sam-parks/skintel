@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skintel/config.dart';
 import 'package:skintel/src/app.dart';
+import 'package:skintel/src/data/article.dart';
 import 'package:skintel/src/data/city_model.dart';
 import 'package:skintel/src/data/skin_model.dart';
 import 'package:skintel/src/data/uv_model.dart';
@@ -20,7 +21,9 @@ void main() async {
           create: (BuildContext context) => SkinColorModel(skinColorIndex),
           child: ChangeNotifierProvider(
               create: (BuildContext context) => UVModel(),
-              child: MyApp(_ProdConfig())))));
+              child: ChangeNotifierProvider(
+                  create: (context) => ArticlesModel(),
+                  child: MyApp(_ProdConfig()))))));
 }
 
 getSavedCity() async {

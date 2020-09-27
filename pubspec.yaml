@@ -49,9 +49,11 @@ dependencies:
   dio: ^3.0.9
   flutter_svg: ^0.18.0
   page_transition: ^1.1.6
+  font_awesome_flutter: ^8.8.1
   
 
 
+  
   #BLOC and PROVIDER
   flutter_bloc: ^6.0.0
   provider: ^4.0.4
