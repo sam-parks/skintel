@@ -141,7 +141,7 @@ class _UVPageState extends State<UVPage> {
             children: [
               Text(
                 "Skintel",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

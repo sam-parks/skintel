@@ -24,12 +24,13 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 10, top: 15),
+                  padding: const EdgeInsets.only(left: 10, top: 20),
                   child: Row(
                     children: [
                       Text(
                         "Skintel",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -40,7 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 50),
+                    padding: const EdgeInsets.only(top: 60),
                     child: Text(
                       'Settings',
                       style: TextStyle(

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -33,7 +35,8 @@ class _ArticlesPageState extends State<ArticlesPage> {
                         children: [
                           Text(
                             "Skintel",
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -81,14 +84,38 @@ class _ArticlesPageState extends State<ArticlesPage> {
                     title: Text(
                       articlesModel.articles[index].title,
                       style: TextStyle(
-                        fontFamily: kFontFamilyNormal,
+                        fontFamily: kFontFamilyBold,
                       ),
                     ),
-                    subtitle: Text(
-                      articlesModel.articles[index].description,
-                      style: TextStyle(
-                        fontFamily: kFontFamilyNormal,
-                      ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          articlesModel.articles[index].description,
+                          style: TextStyle(
+                            fontFamily: kFontFamilyNormal,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 3),
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Reference: ",
+                                style: TextStyle(
+                                    fontFamily: kFontFamilyBold,
+                                    color: Colors.black),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        articlesModel.articles[index].reference,
+                                    style: TextStyle(
+                                      fontFamily: kFontFamilyNormal,
+                                    ),
+                                  )
+                                ]),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
@@ -100,69 +127,88 @@ class _ArticlesPageState extends State<ArticlesPage> {
 
   articleOfTheDay(Article article) {
     return Container(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: AutoSizeText(
-                    "Article of the Day",
-                    minFontSize: 20,
-                    style: TextStyle(
-                        fontFamily: kFontFamilyNormal, color: Colors.white),
-                  ),
+          GestureDetector(
+            onTap: () async {
+              String url = article.url.trim();
+
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+            child: Card(
+              elevation: 5,
+              child: Container(
+                height: 190,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: AutoSizeText(
+                        "Article of the Day",
+                        minFontSize: 24,
+                        style: TextStyle(
+                          fontFamily: kFontFamilyBold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 2,
+                      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                      color: Colors.amberAccent,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(FontAwesomeIcons.sun, color: Colors.amber),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        article.title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: kFontFamilyBold, fontSize: 18),
+                      ),
+                    ),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: AutoSizeText(
+                          article.description,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: kFontFamilyNormal,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5, bottom: 5),
+                      child: RichText(
+                        text: TextSpan(
+                            text: "Reference: ",
+                            style: TextStyle(
+                                fontFamily: kFontFamilyBold,
+                                color: Colors.black),
+                            children: [
+                              TextSpan(
+                                text: article.reference,
+                                style: TextStyle(
+                                  fontFamily: kFontFamilyNormal,
+                                ),
+                              )
+                            ]),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              GestureDetector(
-                onTap: () async {
-                  String url = article.url.trim();
-
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
-                child: Card(
-                  elevation: 5,
-                  child: Container(
-                    height: 150,
-                    width: 230,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child:
-                              Icon(FontAwesomeIcons.sun, color: Colors.amber),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            article.title,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: kFontFamilyBold, fontSize: 18),
-                          ),
-                        ),
-                        Flexible(
-                          child: AutoSizeText(
-                            article.description,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: kFontFamilyNormal,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
         ],
       ),

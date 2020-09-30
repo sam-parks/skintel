@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -78,7 +80,11 @@ class _MyAppState extends State<MyApp> {
   _getArticles() async {
     List<Article> articles = await _articleService.getArticles();
 
-    _articlesModel.updateArticles(articles);
+    int index = Random().nextInt(articles.length - 1);
+    Article dailyArticle = articles[index];
+    articles.remove(index);
+
+    _articlesModel.updateArticles(articles, dailyArticle);
   }
 }
 
