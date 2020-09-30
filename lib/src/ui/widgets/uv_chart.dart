@@ -41,13 +41,12 @@ class _UVChartState extends State<UVChart> {
   }
 
   SfCartesianChart getAnimationSplineChart() {
-
     return SfCartesianChart(
         plotAreaBorderWidth: 0,
         primaryXAxis: NumericAxis(
           isVisible: false,
-          minimum: widget.sunset.hour.toDouble(),
-          maximum: widget.sunrise.hour.toDouble(),
+          minimum: widget.sunriseData.hour.toDouble(),
+          maximum: widget.sunsetData.hour.toDouble(),
         ),
         primaryYAxis: NumericAxis(
           maximumLabels: 2,

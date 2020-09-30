@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -28,14 +29,22 @@ class _ArticlesPageState extends State<ArticlesPage> {
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.only(left: 10),
-                      child: Image.asset(
-                        'assets/images/skintel_white.png',
-                        height: 60,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Skintel",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.wb_sunny),
+                          )
+                        ],
                       ),
                     ),
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 40),
                         child: Text(
                           'Articles',
                           style: TextStyle(
@@ -49,6 +58,11 @@ class _ArticlesPageState extends State<ArticlesPage> {
                   ],
                 );
               }
+
+              if (index == 1) {
+                return articleOfTheDay(articlesModel.articles[index]);
+              }
+
               return GestureDetector(
                 onTap: () async {
                   String url = articlesModel.articles[index].url.trim();
@@ -82,5 +96,76 @@ class _ArticlesPageState extends State<ArticlesPage> {
             }),
       ),
     ]);
+  }
+
+  articleOfTheDay(Article article) {
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText(
+                    "Article of the Day",
+                    minFontSize: 20,
+                    style: TextStyle(
+                        fontFamily: kFontFamilyNormal, color: Colors.white),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  String url = article.url.trim();
+
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: Card(
+                  elevation: 5,
+                  child: Container(
+                    height: 150,
+                    width: 230,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child:
+                              Icon(FontAwesomeIcons.sun, color: Colors.amber),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            article.title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: kFontFamilyBold, fontSize: 18),
+                          ),
+                        ),
+                        Flexible(
+                          child: AutoSizeText(
+                            article.description,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: kFontFamilyNormal,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,11 +7,13 @@ import 'package:skintel/src/app.dart';
 import 'package:skintel/src/data/article.dart';
 import 'package:skintel/src/data/city_model.dart';
 import 'package:skintel/src/data/skin_model.dart';
+import 'package:skintel/src/data/user_model.dart';
 import 'package:skintel/src/data/uv_model.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   String city = await getSavedCity();
   int skinColorIndex = await getSavedSkinColor();
   SyncfusionLicense.registerLicense(
@@ -23,7 +26,9 @@ void main() async {
               create: (BuildContext context) => UVModel(),
               child: ChangeNotifierProvider(
                   create: (context) => ArticlesModel(),
-                  child: MyApp(_ProdConfig()))))));
+                  child: ChangeNotifierProvider(
+                      create: (_) => UserModel(),
+                      child: MyApp(_ProdConfig())))))));
 }
 
 getSavedCity() async {

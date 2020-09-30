@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:skintel/src/data/article.dart';
 
 class ArticleService {
-  final Firestore _firestore;
+  final FirebaseFirestore _firestore;
 
   ArticleService(this._firestore);
 
@@ -12,11 +12,10 @@ class ArticleService {
   getArticles() async {
     List<Article> articles = [];
 
-    QuerySnapshot snapshot = await _articlesCollection.getDocuments();
+    QuerySnapshot snapshot = await _articlesCollection.get();
 
-    for (var articleDoc in snapshot.documents) {
-      print(articleDoc.data);
-      articles.add(Article.fromJson(articleDoc.data));
+    for (var articleDoc in snapshot.docs) {
+      articles.add(Article.fromJson(articleDoc.data()));
     }
 
     return articles;

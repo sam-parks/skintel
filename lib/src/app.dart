@@ -11,6 +11,7 @@ import 'package:skintel/src/locator.dart';
 import 'package:skintel/src/services/article_service.dart';
 import 'package:skintel/src/services/uv_service.dart';
 import 'package:skintel/src/ui/pages/articles_page.dart';
+import 'package:skintel/src/ui/pages/settings_page.dart';
 import 'package:skintel/src/ui/pages/uv_page.dart';
 import 'package:skintel/src/ui/style.dart';
 import 'package:skintel/src/ui/widgets/animated_splash.dart';
@@ -90,7 +91,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = [UVPage(), ArticlesPage()];
+  final List<Widget> _pages = [UVPage(), ArticlesPage(), SettingsPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +158,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       label: "UV", icon: Icon(Icons.wb_sunny)),
                   BottomNavigationBarItem(
                       label: "Articles", icon: Icon(Icons.article)),
+                  BottomNavigationBarItem(
+                      label: "Settings", icon: Icon(Icons.settings)),
                 ]),
           );
   }

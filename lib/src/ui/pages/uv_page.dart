@@ -137,9 +137,17 @@ class _UVPageState extends State<UVPage> {
           ),
         Padding(
           padding: const EdgeInsets.only(left: 10, top: 20),
-          child: Image.asset(
-            'assets/images/skintel_white.png',
-            height: 60,
+          child: Row(
+            children: [
+              Text(
+                "Skintel",
+                style: TextStyle(fontSize: 18),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.wb_sunny),
+              )
+            ],
           ),
         ),
       ],
