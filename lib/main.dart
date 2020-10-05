@@ -16,12 +16,14 @@ void main() async {
   await Firebase.initializeApp();
   String city = await getSavedCity();
   int skinColorIndex = await getSavedSkinColor();
+  int skinTypeIndex = await getSavedSkinType() ?? 0;
   SyncfusionLicense.registerLicense(
       'NT8mJyc2IWhia31hfWN9Z2doYmF8YGJ8ampqanNiYmlmamlmanMDHmgjMiE4ICAyEyY1P302NyY=');
   runApp(ChangeNotifierProvider(
       create: (BuildContext context) => CityModel(city),
       child: ChangeNotifierProvider(
-          create: (BuildContext context) => SkinColorModel(skinColorIndex),
+          create: (BuildContext context) =>
+              SkinColorModel(skinColorIndex, skinTypeIndex),
           child: ChangeNotifierProvider(
               create: (BuildContext context) => UVModel(),
               child: ChangeNotifierProvider(
@@ -44,6 +46,11 @@ getSavedSkinColorIndex() async {
 getSavedSkinColor() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getInt('skinColorIndex') ?? null;
+}
+
+getSavedSkinType() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getInt('skinTypeIndex') ?? null;
 }
 
 class _ProdConfig extends Config {

@@ -41,157 +41,182 @@ class UVInfo extends StatelessWidget {
               border: Border.all(color: Colors.amber),
               color: Colors.white,
               borderRadius: BorderRadius.circular(8)),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  cityModel.city,
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: kFontFamilyNormal),
-                ),
-              ),
-              Flexible(
-                child: AutoSizeText(uvModel.currentUV.toStringAsFixed(0),
-                    style:
-                        TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
-              ),
-              Text("Current UV Index",
-                  style: TextStyle(fontFamily: kFontFamilyNormal)),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children: [
-                    Container(
-                        height: 150,
-                        child: UVChart(
-                          sunrise: uvModel.sunrise,
-                          sunset: uvModel.sunset,
-                          sunriseData: sunrise,
-                          sunsetData: sunset,
-                          maxUV: uvModel.maxUV,
-                          uvMaxHour: maxUVHour ?? uvModel.maxUVHour,
-                        )),
-                    Align(
-                        alignment: Alignment.topCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: Text(
-                              "Max UV: " + uvModel.maxUV.toStringAsFixed(2)),
-                        )),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Text("Sunrise: " + newFormat.format(uvModel.sunrise),
-                        style: TextStyle(
-                          fontFamily: kFontFamilyNormal,
-                        )),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    cityModel.city,
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: kFontFamilyNormal),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: Text("Sunset: " + newFormat.format(uvModel.sunset),
-                        style: TextStyle(
-                          fontFamily: kFontFamilyNormal,
-                        )),
-                  )
-                ],
-              ),
-              Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                ),
+                Flexible(
+                  child: AutoSizeText(uvModel.currentUV.toStringAsFixed(0),
+                      style:
+                          TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
+                ),
+                Text("Current UV Index",
+                    style: TextStyle(fontFamily: kFontFamilyNormal)),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Stack(
+                    children: [
+                      Container(
+                          height: 160,
+                          child: UVChart(
+                            sunrise: uvModel.sunrise,
+                            sunset: uvModel.sunset,
+                            sunriseData: sunrise,
+                            sunsetData: sunset,
+                            maxUV: uvModel.maxUV,
+                            uvMaxHour: maxUVHour ?? uvModel.maxUVHour,
+                          )),
+                      Align(
+                          child: Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Text(
+                          "Max UV: " + uvModel.maxUV.toStringAsFixed(2),
+                          style: TextStyle(fontFamily: kFontFamilyBold),
+                        ),
+                      )),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Recommendations",
-                        style: TextStyle(
-                            fontFamily: kFontFamilyBold, fontSize: 24),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "General",
-                        style: TextStyle(
-                            color: Colors.amber,
-                            fontFamily: kFontFamilyBold,
-                            fontSize: 16),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 8.0, left: 8.0, right: 8.0),
-                        child: AutoSizeText(
-                            mainRecommendation(skinColorModel, uvModel),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: kFontFamilyBold, fontSize: 14)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "SPF",
-                        style: TextStyle(
-                            color: Colors.amber,
-                            fontFamily: kFontFamilyBold,
-                            fontSize: 16),
-                      ),
-                    ),
-                    Flexible(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 8.0, left: 8.0, right: 8.0),
-                          child: AutoSizeText(spfRecommendation(skinColorModel),
-                              textAlign: TextAlign.center,
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child:
+                          Text("Sunrise: " + newFormat.format(uvModel.sunrise),
                               style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: kFontFamilyBold,
+                                fontFamily: kFontFamilyNormal,
                               )),
-                        ),
-                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Clothing",
-                        style: TextStyle(
-                            color: Colors.amber,
-                            fontFamily: kFontFamilyBold,
-                            fontSize: 16),
-                      ),
-                    ),
-                    Flexible(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 8.0, left: 8.0, right: 8.0),
-                          child: AutoSizeText(
-                              clothingRec(uvModel.currentUV.toInt()),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: kFontFamilyBold,
-                              )),
-                        ),
-                      ),
+                      padding: const EdgeInsets.only(right: 5.0),
+                      child: Text("Sunset: " + newFormat.format(uvModel.sunset),
+                          style: TextStyle(
+                            fontFamily: kFontFamilyNormal,
+                          )),
                     )
                   ],
                 ),
-              )
-            ],
+                Container(
+                  child: Card(
+                    color: Colors.amber[50],
+                    elevation: 3,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Recommendations",
+                            style: TextStyle(
+                                fontFamily: kFontFamilyBold, fontSize: 24),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "General",
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontFamily: kFontFamilyBold,
+                                fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 8.0, left: 8.0, right: 8.0),
+                          child: AutoSizeText(
+                              mainRecommendation(skinColorModel, uvModel),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: kFontFamilyBold, fontSize: 14)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "SPF",
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontFamily: kFontFamilyBold,
+                                fontSize: 16),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 8.0, left: 8.0, right: 8.0),
+                            child:
+                                AutoSizeText(spfRecommendation(skinColorModel),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: kFontFamilyBold,
+                                    )),
+                          ),
+                        ),
+                        if (skinColorModel.hoursOutdoors != null)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Sunscreen",
+                              style: TextStyle(
+                                  color: Colors.amber,
+                                  fontFamily: kFontFamilyBold,
+                                  fontSize: 16),
+                            ),
+                          ),
+                        if (skinColorModel.hoursOutdoors != null)
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 8.0, left: 8.0, right: 8.0),
+                              child: AutoSizeText(sunscreenRec(skinColorModel),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: kFontFamilyBold,
+                                  )),
+                            ),
+                          ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Clothing",
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontFamily: kFontFamilyBold,
+                                fontSize: 16),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 8.0, left: 8.0, right: 8.0),
+                            child: AutoSizeText(
+                                clothingRec(uvModel.currentUV.toInt()),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: kFontFamilyBold,
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         Positioned(
@@ -206,6 +231,26 @@ class UVInfo extends StatelessWidget {
             ))
       ],
     );
+  }
+
+  sunscreenRec(SkinColorModel skinColorModel) {
+    switch (skinColorModel.hoursOutdoors) {
+      case 1:
+        return "Spray";
+        break;
+      case 2:
+        return "Spray";
+        break;
+      case 3:
+        return "Cream or Gel";
+        break;
+      case 4:
+        return "Lotion";
+        break;
+      case 5:
+        return "Cream, Lotion, or Spray";
+        break;
+    }
   }
 
   mainRecommendation(SkinColorModel skinColorModel, UVModel uvModel) {
@@ -462,19 +507,28 @@ class UVInfo extends StatelessWidget {
   spfRecommendation(SkinColorModel skinColorModel) {
     switch (skinColorModel.skinColorIndex) {
       case 0:
+        if (skinColorModel.hoursOutdoors > 2) return "50+";
         return "30+";
         break;
       case 1:
+        if (skinColorModel.hoursOutdoors > 2) return "50+";
         return "30+";
         break;
-
       case 2:
+        if (skinColorModel.hoursOutdoors == 1) return "15";
+        if (skinColorModel.hoursOutdoors > 3) return "50+";
         return "30+";
         break;
       case 3:
+        if (skinColorModel.hoursOutdoors == 1) return "8-14";
+        if (skinColorModel.hoursOutdoors == 4) return "30";
+        if (skinColorModel.hoursOutdoors == 5) return "50+";
         return "15+";
         break;
       case 4:
+        if (skinColorModel.hoursOutdoors == 3) return "15";
+        if (skinColorModel.hoursOutdoors == 4) return "15";
+        if (skinColorModel.hoursOutdoors == 5) return "30";
         return "8-14+";
         break;
       default:

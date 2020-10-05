@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skintel/src/data/user_model.dart';
+import 'package:skintel/src/app.dart';
+import 'package:skintel/src/data/skin_model.dart';
 import 'package:skintel/src/ui/style.dart';
+import 'package:skintel/src/ui/widgets/skin_color_circle.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key}) : super(key: key);
@@ -12,9 +14,12 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  SkinColorModel skinColorModel;
+
   @override
   Widget build(BuildContext context) {
-    UserModel userModel = Provider.of<UserModel>(context);
+    //UserModel userModel = Provider.of<UserModel>(context);
+    skinColorModel = Provider.of<SkinColorModel>(context);
     return Column(
       children: [
         Column(
@@ -54,7 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            Padding(
+            /*   Padding(
               padding: const EdgeInsets.only(top: 16.0, left: 12.0),
               child: Text("Account",
                   style: TextStyle(
@@ -94,13 +99,13 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                     value: userModel.user.sunNotification,
                   ),
-                )),
-            Padding(
+                )), */
+            /*   Padding(
               padding: const EdgeInsets.only(top: 16.0, left: 12.0),
               child: Text("Skin",
                   style: TextStyle(
                       fontFamily: kFontFamilyBold, color: Colors.black)),
-            ),
+            ), */
             Container(
                 decoration: BoxDecoration(
                     color: Colors.amber,
@@ -109,6 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: ListTile(
                   title: Text("Complexion",
                       style: TextStyle(fontFamily: kFontFamilyNormal)),
+                  trailing: _complexionDropdown(),
                 )),
             Container(
                 decoration: BoxDecoration(
@@ -116,12 +122,246 @@ class _SettingsPageState extends State<SettingsPage> {
                     borderRadius: BorderRadius.circular(8)),
                 margin: const EdgeInsets.all(8),
                 child: ListTile(
-                  title: Text("Skin Color",
+                  trailing: _skinTypeDropdown(),
+                  title: Text("Skin Type",
+                      style: TextStyle(fontFamily: kFontFamilyNormal)),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(8)),
+                margin: const EdgeInsets.all(8),
+                child: ListTile(
+                  trailing: _hoursOutdoorsDropdown(),
+                  title: Text("Hours Outdoors",
                       style: TextStyle(fontFamily: kFontFamilyNormal)),
                 )),
           ],
         ),
       ],
     );
+  }
+
+  _hoursOutdoorsDropdown() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButton(
+        value: skinColorModel.hoursOutdoors.toString(),
+        items: [
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateHoursOutdoors(1),
+              value: "1",
+              child: Text(
+                "1",
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateHoursOutdoors(2),
+              value: "2",
+              child: Text(
+                "2",
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateHoursOutdoors(3),
+              value: "3",
+              child: Text(
+                "3",
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateHoursOutdoors(4),
+              value: "4",
+              child: Text(
+                "4",
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateHoursOutdoors(5),
+              value: "5",
+              child: Text(
+                "5",
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+        ],
+        onChanged: (value) {},
+      ),
+    );
+  }
+
+  _skinTypeDropdown() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButton(
+        value: determineSkinTypeText(skinColorModel.skinTypeIndex),
+        items: [
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinTypeIndex(0),
+              value: determineSkinTypeText(0),
+              child: Text(
+                determineSkinTypeText(0),
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinTypeIndex(1),
+              value: determineSkinTypeText(1),
+              child: Text(
+                determineSkinTypeText(1),
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinTypeIndex(2),
+              value: determineSkinTypeText(2),
+              child: Text(
+                determineSkinTypeText(0),
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinTypeIndex(3),
+              value: determineSkinTypeText(3),
+              child: Text(
+                determineSkinTypeText(0),
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinTypeIndex(4),
+              value: determineSkinTypeText(4),
+              child: Text(
+                determineSkinTypeText(4),
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+        ],
+        onChanged: (value) {},
+      ),
+    );
+  }
+
+  _complexionDropdown() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButton(
+        value: determineSkinText(skinColorModel.skinColorIndex),
+        items: [
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinColorIndex(0),
+              value: "Very Fair",
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Very Fair",
+                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                    ),
+                  ),
+                  SkinColorCircle(
+                    skinColorIndex: 0,
+                    selected: false,
+                    updateSkinColorForParent: () {},
+                  ),
+                ],
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinColorIndex(1),
+              value: "Fair",
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Fair",
+                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                    ),
+                  ),
+                  SkinColorCircle(
+                    skinColorIndex: 1,
+                    selected: false,
+                    updateSkinColorForParent: () {},
+                  ),
+                ],
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinColorIndex(2),
+              value: "Medium",
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Medium",
+                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                    ),
+                  ),
+                  SkinColorCircle(
+                    skinColorIndex: 2,
+                    selected: false,
+                    updateSkinColorForParent: () {},
+                  ),
+                ],
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinColorIndex(3),
+              value: "Olive",
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Olive",
+                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                    ),
+                  ),
+                  SkinColorCircle(
+                    skinColorIndex: 3,
+                    selected: false,
+                    updateSkinColorForParent: () {},
+                  ),
+                ],
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinColorIndex(4),
+              value: "Dark",
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Dark",
+                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                    ),
+                  ),
+                  SkinColorCircle(
+                    skinColorIndex: 4,
+                    selected: false,
+                    updateSkinColorForParent: () {},
+                  ),
+                ],
+              ))
+        ],
+        onChanged: (value) {},
+      ),
+    );
+  }
+}
+
+String determineSkinTypeText(int index) {
+  switch (index) {
+    case 0:
+      return "Acne and Dry";
+      break;
+    case 1:
+      return "Acne and Oily";
+      break;
+    case 2:
+      return "No Acne and Dry";
+      break;
+    case 3:
+      return "No Acne and Oily";
+      break;
+    case 4:
+      return "No Acne";
+      break;
+    default:
+      return "No Acne";
   }
 }

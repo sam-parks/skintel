@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:skintel/config.dart';
@@ -109,48 +108,6 @@ class _MyHomePageState extends State<MyHomePage> {
             body: Center(
               child: _pages.elementAt(_selectedIndex),
             ),
-            floatingActionButton: _selectedIndex == 0
-                ? SpeedDial(
-                    marginRight: 18,
-                    marginBottom: 20,
-                    animatedIcon: AnimatedIcons.menu_close,
-                    animatedIconTheme: IconThemeData(size: 22.0),
-                    closeManually: false,
-                    curve: Curves.bounceIn,
-                    overlayColor: Colors.black,
-                    overlayOpacity: 0.5,
-                    onOpen: () => print('OPENING DIAL'),
-                    onClose: () => print('DIAL CLOSED'),
-                    tooltip: 'Speed Dial',
-                    heroTag: 'speed-dial-hero-tag',
-                    backgroundColor:
-                        determineSkinColor(_skinColorModel.skinColorIndex),
-                    foregroundColor: Colors.transparent,
-                    elevation: 8.0,
-                    shape: CircleBorder(),
-                    children: [
-                      SpeedDialChild(
-                          backgroundColor: AppColors.skin0,
-                          onTap: () => _skinColorModel.updateSkinColorIndex(0)),
-                      SpeedDialChild(
-                        backgroundColor: AppColors.skin1,
-                        onTap: () => _skinColorModel.updateSkinColorIndex(1),
-                      ),
-                      SpeedDialChild(
-                        backgroundColor: AppColors.skin2,
-                        onTap: () => _skinColorModel.updateSkinColorIndex(2),
-                      ),
-                      SpeedDialChild(
-                        backgroundColor: AppColors.skin3,
-                        onTap: () => _skinColorModel.updateSkinColorIndex(3),
-                      ),
-                      SpeedDialChild(
-                        backgroundColor: AppColors.skin4,
-                        onTap: () => _skinColorModel.updateSkinColorIndex(4),
-                      ),
-                    ],
-                  )
-                : Container(),
             bottomNavigationBar: SnakeNavigationBar(
                 selectedItemColor: Colors.amber,
                 currentIndex: _selectedIndex,
