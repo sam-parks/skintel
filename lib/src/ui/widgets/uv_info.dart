@@ -507,29 +507,39 @@ class UVInfo extends StatelessWidget {
   spfRecommendation(SkinColorModel skinColorModel) {
     switch (skinColorModel.skinColorIndex) {
       case 0:
-        if (skinColorModel.hoursOutdoors > 2) return "50+";
-        return "30+";
+        if (skinColorModel.hoursOutdoors == 2 ||
+            skinColorModel.hoursOutdoors == 3) return "50+";
+        if (skinColorModel.hoursOutdoors == 4 ||
+            skinColorModel.hoursOutdoors == 5) return "50-100";
+        return "30";
         break;
       case 1:
-        if (skinColorModel.hoursOutdoors > 2) return "50+";
+        if (skinColorModel.hoursOutdoors == 2 ||
+            skinColorModel.hoursOutdoors == 3) return "50+";
+        if (skinColorModel.hoursOutdoors == 4 ||
+            skinColorModel.hoursOutdoors == 5) return "50-100";
         return "30+";
         break;
       case 2:
-        if (skinColorModel.hoursOutdoors == 1) return "15";
+        if (skinColorModel.hoursOutdoors == 1 ||
+            skinColorModel.hoursOutdoors == 2) return "30";
         if (skinColorModel.hoursOutdoors > 3) return "50+";
         return "30+";
         break;
       case 3:
-        if (skinColorModel.hoursOutdoors == 1) return "8-14";
-        if (skinColorModel.hoursOutdoors == 4) return "30";
+        if (skinColorModel.hoursOutdoors == 1 ||
+            skinColorModel.hoursOutdoors == 2) return "30";
+        if (skinColorModel.hoursOutdoors == 3) return "30-50";
+        if (skinColorModel.hoursOutdoors == 4) return "50+";
         if (skinColorModel.hoursOutdoors == 5) return "50+";
-        return "15+";
         break;
       case 4:
-        if (skinColorModel.hoursOutdoors == 3) return "15";
-        if (skinColorModel.hoursOutdoors == 4) return "15";
-        if (skinColorModel.hoursOutdoors == 5) return "30";
-        return "8-14+";
+        if (skinColorModel.hoursOutdoors == 1 ||
+            skinColorModel.hoursOutdoors == 2) return "30";
+        if (skinColorModel.hoursOutdoors == 3) return "30-50";
+        if (skinColorModel.hoursOutdoors == 4) return "30-50";
+        if (skinColorModel.hoursOutdoors == 5) return "50+";
+
         break;
       default:
     }

@@ -296,7 +296,7 @@ String determineSkinDescription(int index) {
       return "Very rarely burns, tans very easily";
       break;
     case 4:
-      return "Never burns";
+      return "Rarely burns or never burns";
       break;
     default:
       return "Please select a skin tone that best represents you.";
