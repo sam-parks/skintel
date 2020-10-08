@@ -36,9 +36,9 @@ class UVInfo extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 40.0),
-          height: MediaQuery.of(context).size.height * .8,
+          height: MediaQuery.of(context).size.height * .7,
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.amber),
+              border: Border.all(color: Colors.amber, width: 2),
               color: Colors.white,
               borderRadius: BorderRadius.circular(8)),
           child: SingleChildScrollView(
@@ -234,21 +234,21 @@ class UVInfo extends StatelessWidget {
   }
 
   sunscreenRec(SkinColorModel skinColorModel) {
-    switch (skinColorModel.hoursOutdoors) {
+    switch (skinColorModel.skinTypeIndex) {
+      case 0:
+        return "Non-comedogenic lotions or creams";
+        break;
       case 1:
-        return "Spray";
+        return "Non-comedogenic lotions";
         break;
       case 2:
-        return "Spray";
+        return "Creams or lotions, avoid sprays and gels";
         break;
       case 3:
-        return "Cream or Gel";
+        return "Light-weight, noncomedogenic, lotion formulation";
         break;
       case 4:
-        return "Lotion";
-        break;
-      case 5:
-        return "Cream, Lotion, or Spray";
+        return "Lotions, creams or sprays";
         break;
     }
   }

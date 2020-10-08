@@ -6,7 +6,7 @@ class SkinColorModel extends ChangeNotifier {
 
   int _skinColorIndex;
   int _skinTypeIndex;
-  int _hoursOutdoors;
+  int _hoursOutdoors = 1;
 
   int get skinColorIndex => _skinColorIndex;
   int get skinTypeIndex => _skinTypeIndex;

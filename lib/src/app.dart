@@ -16,6 +16,7 @@ import 'package:skintel/src/ui/pages/settings_page.dart';
 import 'package:skintel/src/ui/pages/uv_page.dart';
 import 'package:skintel/src/ui/style.dart';
 import 'package:skintel/src/ui/widgets/animated_splash.dart';
+import 'package:skintel/src/ui/widgets/dialogs.dart';
 import 'package:skintel/src/ui/widgets/skin_color_circle.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
@@ -97,6 +98,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [UVPage(), ArticlesPage(), SettingsPage()];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      print("Disclaimer");
+      disclaimerDialog(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
