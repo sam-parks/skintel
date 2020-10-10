@@ -64,7 +64,7 @@ class _UVPageState extends State<UVPage> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 8.0, horizontal: 120),
                     child: Text(
-                      "Plase type in your current city.",
+                      "Please type in your current city.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.grey,
@@ -141,11 +141,20 @@ class _UVPageState extends State<UVPage> {
             children: [
               Text(
                 "Skintel",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: _uvModel.currentUV == 0.0
+                        ? Colors.white
+                        : Colors.black),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.wb_sunny),
+                child: Icon(
+                  Icons.wb_sunny,
+                  color:
+                      _uvModel.currentUV == 0.0 ? Colors.white : Colors.black,
+                ),
               )
             ],
           ),

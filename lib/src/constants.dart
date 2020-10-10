@@ -52,7 +52,8 @@ class FairRecommendations {
   static const zero = "Enjoy your time outside!";
   static const one =
       "Wear sunglasses (Look for labels that say, \"100% protection against both UVA and UVB\"";
-  static const two = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const two =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
   static const three = "Take precautions, such as covering while outside.";
   static const four =
       "Stay in the shade near midday (12 p.m.) when the sun is strongest.";
@@ -63,9 +64,7 @@ class FairRecommendations {
   static const eight = "Seek shade while outside.";
   static const nine =
       "Take extra precautions; Unprotected skin will be damaged and can burn quickly.";
-  static const ten =
-      "Take all precautions; Unprotected skin can burn in minutes.";
-  static const eleven =
+  static const tenAndEleven =
       "Take all precautions; Unprotected skin can burn in minutes.";
 }
 
@@ -73,8 +72,8 @@ class MediumRecommendations {
   static const zero = "Enjoy your time outside!";
   static const one =
       "Wear sunglasses (Look for labels that say, \"100% protection against both UVA and UVB\"";
-  static const two = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
-  static const three = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const twoAndThree =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
   static const four = "Take precautions, such as covering while outside.";
 
   static const five =
@@ -85,9 +84,7 @@ class MediumRecommendations {
   static const eight = "Seek shade while outside.";
   static const nine =
       "Take extra precautions; Unprotected skin will be damaged and can burn quickly.";
-  static const ten =
-      "Take all precautions; Unprotected skin can burn in minutes.";
-  static const eleven =
+  static const tenAndEleven =
       "Take all precautions; Unprotected skin can burn in minutes.";
 }
 
@@ -95,9 +92,8 @@ class OliveRecommendations {
   static const zero = "Enjoy your time outside!";
   static const one =
       "Wear sunglasses (Look for labels that say, \"100% protection against both UVA and UVB\"";
-  static const two = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
-  static const three = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
-  static const four =  "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const twoThroughFour =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
 
   static const five = "Take precautions, such as covering while outside.";
 
@@ -119,11 +115,15 @@ class DarkRecommendations {
   static const zero = "Enjoy your time outside!";
   static const one =
       "Wear sunglasses (Look for labels that say, \"100% protection against both UVA and UVB\"";
-  static const two = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
-  static const three = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
-  static const four = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const two =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const three =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const four =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
 
-  static const five = "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const five =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
 
   static const six = "Take precautions, such as covering while outside..";
   static const seven =

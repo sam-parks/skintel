@@ -180,7 +180,7 @@ class _SettingsPageState extends State<SettingsPage> {
               onTap: () => skinColorModel.updateHoursOutdoors(5),
               value: "5",
               child: Text(
-                "5",
+                "5+",
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
         ],
@@ -197,37 +197,37 @@ class _SettingsPageState extends State<SettingsPage> {
         items: [
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(0),
-              value: determineSkinTypeText(0),
+              value: "Acne and Dry",
               child: Text(
-                determineSkinTypeText(0),
+                "Acne and Dry",
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(1),
-              value: determineSkinTypeText(1),
+              value: "Acne and Oily",
               child: Text(
-                determineSkinTypeText(1),
+                "Acne and Oily",
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(2),
-              value: determineSkinTypeText(2),
+              value: "No Acne and Dry",
               child: Text(
-                determineSkinTypeText(0),
+                "No Acne and Dry",
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(3),
-              value: determineSkinTypeText(3),
+              value: "No Acne and Oily",
               child: Text(
-                determineSkinTypeText(0),
+                "No Acne and Oily",
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(4),
-              value: determineSkinTypeText(4),
+              value: "No Acne",
               child: Text(
-                determineSkinTypeText(4),
+                "No Acne",
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
         ],
@@ -245,96 +245,166 @@ class _SettingsPageState extends State<SettingsPage> {
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinColorIndex(0),
               value: "Very Fair",
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Text(
+                          "Very Fair",
+                          style: TextStyle(fontFamily: kFontFamilyBold),
+                        ),
+                      ),
+                      SkinColorCircle(
+                        skinColorIndex: 0,
+                        selected: false,
+                        updateSkinColorForParent: () {},
+                      ),
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      "Very Fair",
-                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                      determineSkinDescription(0),
+                      style: TextStyle(
+                          fontFamily: kFontFamilyNormal, fontSize: 10),
                     ),
-                  ),
-                  SkinColorCircle(
-                    skinColorIndex: 0,
-                    selected: false,
-                    updateSkinColorForParent: () {},
-                  ),
+                  )
                 ],
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinColorIndex(1),
               value: "Fair",
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Text(
+                          "Fair",
+                          style: TextStyle(fontFamily: kFontFamilyBold),
+                        ),
+                      ),
+                      SkinColorCircle(
+                        skinColorIndex: 1,
+                        selected: false,
+                        updateSkinColorForParent: () {},
+                      ),
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      "Fair",
-                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                      determineSkinDescription(1),
+                      style: TextStyle(
+                          fontFamily: kFontFamilyNormal, fontSize: 10),
                     ),
-                  ),
-                  SkinColorCircle(
-                    skinColorIndex: 1,
-                    selected: false,
-                    updateSkinColorForParent: () {},
-                  ),
+                  )
                 ],
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinColorIndex(2),
               value: "Medium",
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Text(
+                          "Medium",
+                          style: TextStyle(fontFamily: kFontFamilyBold),
+                        ),
+                      ),
+                      SkinColorCircle(
+                        skinColorIndex: 2,
+                        selected: false,
+                        updateSkinColorForParent: () {},
+                      ),
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      "Medium",
-                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                      determineSkinDescription(2),
+                      style: TextStyle(
+                          fontFamily: kFontFamilyNormal, fontSize: 10),
                     ),
-                  ),
-                  SkinColorCircle(
-                    skinColorIndex: 2,
-                    selected: false,
-                    updateSkinColorForParent: () {},
-                  ),
+                  )
                 ],
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinColorIndex(3),
               value: "Olive",
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Text(
+                          "Olive",
+                          style: TextStyle(fontFamily: kFontFamilyBold),
+                        ),
+                      ),
+                      SkinColorCircle(
+                        skinColorIndex: 3,
+                        selected: false,
+                        updateSkinColorForParent: () {},
+                      ),
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      "Olive",
-                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                      determineSkinDescription(3),
+                      style: TextStyle(
+                          fontFamily: kFontFamilyNormal, fontSize: 10),
                     ),
-                  ),
-                  SkinColorCircle(
-                    skinColorIndex: 3,
-                    selected: false,
-                    updateSkinColorForParent: () {},
-                  ),
+                  )
                 ],
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinColorIndex(4),
               value: "Dark",
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Text(
+                          "Dark",
+                          style: TextStyle(fontFamily: kFontFamilyBold),
+                        ),
+                      ),
+                      SkinColorCircle(
+                        skinColorIndex: 4,
+                        selected: false,
+                        updateSkinColorForParent: () {},
+                      ),
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      "Dark",
-                      style: TextStyle(fontFamily: kFontFamilyNormal),
+                      determineSkinDescription(4),
+                      style: TextStyle(
+                          fontFamily: kFontFamilyNormal, fontSize: 10),
                     ),
-                  ),
-                  SkinColorCircle(
-                    skinColorIndex: 4,
-                    selected: false,
-                    updateSkinColorForParent: () {},
-                  ),
+                  )
                 ],
               ))
         ],

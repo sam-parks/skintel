@@ -312,13 +312,7 @@ class UVInfo extends StatelessWidget {
         return FairRecommendations.nine;
         break;
       case 10:
-        return FairRecommendations.ten;
-        break;
-      case 11:
-        return FairRecommendations.eleven;
-        break;
-      default:
-        return FairRecommendations.eleven;
+        return FairRecommendations.tenAndEleven;
         break;
     }
   }
@@ -416,17 +410,17 @@ class UVInfo extends StatelessWidget {
   mediumMainRec(int currentUV) {
     switch (currentUV) {
       case 0:
-        return FairRecommendations.zero;
+        return MediumRecommendations.zero;
         break;
       case 1:
-        return FairRecommendations.one;
+        return MediumRecommendations.one;
         break;
 
       case 2:
-        return MediumRecommendations.two;
+        return MediumRecommendations.twoAndThree;
         break;
       case 3:
-        return MediumRecommendations.three;
+        return MediumRecommendations.twoAndThree;
         break;
       case 4:
         return MediumRecommendations.four;
@@ -448,13 +442,7 @@ class UVInfo extends StatelessWidget {
         return MediumRecommendations.nine;
         break;
       case 10:
-        return MediumRecommendations.ten;
-        break;
-      case 11:
-        return MediumRecommendations.eleven;
-        break;
-      default:
-        return MediumRecommendations.eleven;
+        return MediumRecommendations.tenAndEleven;
         break;
     }
   }
@@ -468,13 +456,13 @@ class UVInfo extends StatelessWidget {
         return OliveRecommendations.one;
         break;
       case 2:
-        return OliveRecommendations.two;
+        return OliveRecommendations.twoThroughFour;
         break;
       case 3:
-        return OliveRecommendations.three;
+        return OliveRecommendations.twoThroughFour;
         break;
       case 4:
-        return OliveRecommendations.four;
+        return OliveRecommendations.twoThroughFour;
         break;
       case 5:
         return OliveRecommendations.five;
