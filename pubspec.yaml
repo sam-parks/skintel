@@ -95,6 +95,7 @@ flutter:
     - assets/images/
     - assets/images/skintel_white.png
     
+    
   fonts:
     - family: Gibson
       fonts:

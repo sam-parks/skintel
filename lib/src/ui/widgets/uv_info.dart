@@ -17,6 +17,7 @@ class UVInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UVModel uvModel = Provider.of<UVModel>(context);
+    print(uvModel.currentUV);
     CityModel cityModel = Provider.of<CityModel>(context);
     SkinColorModel skinColorModel = Provider.of<SkinColorModel>(context);
     UVData sunrise;
@@ -56,12 +57,20 @@ class UVInfo extends StatelessWidget {
                   ),
                 ),
                 Flexible(
-                  child: AutoSizeText(uvModel.currentUV.toStringAsFixed(0),
+                  child: AutoSizeText(uvModel.currentUV.toInt().toString(),
                       style:
                           TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
                 ),
                 Text("Current UV Index",
-                    style: TextStyle(fontFamily: kFontFamilyNormal)),
+                    style: TextStyle(fontFamily: kFontFamilyBold)),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(uvIndexDescription(uvModel),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontFamily: kFontFamilyNormal)),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Stack(
@@ -115,11 +124,20 @@ class UVInfo extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                              top: 8.0, left: 8.0, right: 8.0, bottom: 4.0),
                           child: Text(
                             "Recommendations",
                             style: TextStyle(
                                 fontFamily: kFontFamilyBold, fontSize: 24),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            "Follow these suggestions to keep your skin protected.",
+                            style: TextStyle(
+                                fontFamily: kFontFamilyNormal, fontSize: 10),
                           ),
                         ),
                         Padding(
@@ -132,38 +150,52 @@ class UVInfo extends StatelessWidget {
                                 fontSize: 16),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 8.0, left: 8.0, right: 8.0),
-                          child: AutoSizeText(
-                              mainRecommendation(skinColorModel, uvModel),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontFamily: kFontFamilyBold, fontSize: 14)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "SPF",
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontFamily: kFontFamilyBold,
-                                fontSize: 16),
-                          ),
-                        ),
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 8.0, left: 8.0, right: 8.0),
-                            child:
-                                AutoSizeText(spfRecommendation(skinColorModel),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: kFontFamilyBold,
-                                    )),
+                            child: AutoSizeText(
+                                mainRecommendation(skinColorModel, uvModel),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontFamily: kFontFamilyBold, fontSize: 14)),
                           ),
                         ),
+                        if (uvModel.currentUV >= 1.0)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "SPF",
+                              style: TextStyle(
+                                  color: Colors.amber,
+                                  fontFamily: kFontFamilyBold,
+                                  fontSize: 16),
+                            ),
+                          ),
+                        if (uvModel.currentUV >= 1.0)
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 8.0, left: 8.0, right: 8.0),
+                              child: AutoSizeText(
+                                  spfRecommendation(skinColorModel),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: kFontFamilyBold,
+                                  )),
+                            ),
+                          ),
+                        if (uvModel.currentUV >= 1.0)
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                              "*More time spent in the sun means that you will need more applications of sunscreen. 1 oz of the applied sunscreen on an adult body is the minimum requirement to attain the SPF outlined on the package.",
+                              style: TextStyle(
+                                  fontFamily: kFontFamilyNormal, fontSize: 10),
+                            ),
+                          ),
                         if (skinColorModel.hoursOutdoors != null)
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -189,6 +221,14 @@ class UVInfo extends StatelessWidget {
                             ),
                           ),
                         Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            "*Thick, pastier sunscreens are more likely to cause acne by clogging pores, so be aware of the sunscreen consistency.",
+                            style: TextStyle(
+                                fontFamily: kFontFamilyNormal, fontSize: 10),
+                          ),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             "Clothing",
@@ -209,6 +249,14 @@ class UVInfo extends StatelessWidget {
                                   fontSize: 14,
                                   fontFamily: kFontFamilyBold,
                                 )),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            "*Skin can still burn through very lightweight clothing materials.",
+                            style: TextStyle(
+                                fontFamily: kFontFamilyNormal, fontSize: 10),
                           ),
                         )
                       ],
@@ -231,6 +279,47 @@ class UVInfo extends StatelessWidget {
             ))
       ],
     );
+  }
+
+  uvIndexDescription(UVModel uvModel) {
+    switch (uvModel.currentUV.toInt()) {
+      case 0:
+        return UVIndexDescriptions.zero;
+        break;
+      case 1:
+        return UVIndexDescriptions.one;
+        break;
+      case 2:
+        return UVIndexDescriptions.two;
+        break;
+      case 3:
+        return UVIndexDescriptions.three;
+        break;
+      case 4:
+        return UVIndexDescriptions.four;
+        break;
+      case 5:
+        return UVIndexDescriptions.five;
+        break;
+      case 6:
+        return UVIndexDescriptions.six;
+        break;
+      case 7:
+        return UVIndexDescriptions.seven;
+        break;
+      case 8:
+        return UVIndexDescriptions.eight;
+        break;
+      case 9:
+        return UVIndexDescriptions.nine;
+        break;
+      case 10:
+        return UVIndexDescriptions.ten;
+        break;
+      case 11:
+        return UVIndexDescriptions.eleven;
+        break;
+    }
   }
 
   sunscreenRec(SkinColorModel skinColorModel) {
@@ -278,14 +367,23 @@ class UVInfo extends StatelessWidget {
   }
 
   paleMainRec(int currentUV) {
-    switch (currentUV) {
+    String rec = '';
+
+    for (int i = 0; i <= currentUV; i++) {
+      if (paleRecString(i - 1) != paleRecString(i))
+        rec += (" " + paleRecString(i));
+    }
+    return rec;
+  }
+
+  paleRecString(uv) {
+    switch (uv) {
       case 0:
         return FairRecommendations.zero;
         break;
       case 1:
         return FairRecommendations.one;
         break;
-
       case 2:
         return FairRecommendations.two;
         break;
@@ -301,7 +399,6 @@ class UVInfo extends StatelessWidget {
       case 6:
         return FairRecommendations.six;
         break;
-
       case 7:
         return FairRecommendations.seven;
         break;
@@ -312,7 +409,10 @@ class UVInfo extends StatelessWidget {
         return FairRecommendations.nine;
         break;
       case 10:
-        return FairRecommendations.tenAndEleven;
+        return FairRecommendations.ten;
+        break;
+      case 11:
+        return FairRecommendations.ten;
         break;
     }
   }
@@ -364,6 +464,16 @@ class UVInfo extends StatelessWidget {
   }
 
   darkMainRec(int currentUV) {
+    String rec = '';
+
+    for (int i = 0; i <= currentUV; i++) {
+      if (darkRecString(i - 1) != darkRecString(i))
+        rec += (" " + darkRecString(i));
+    }
+    return rec;
+  }
+
+  darkRecString(int currentUV) {
     switch (currentUV) {
       case 0:
         return DarkRecommendations.zero;
@@ -401,13 +511,20 @@ class UVInfo extends StatelessWidget {
       case 11:
         return DarkRecommendations.eleven;
         break;
-      default:
-        return DarkRecommendations.eleven;
-        break;
     }
   }
 
   mediumMainRec(int currentUV) {
+    String rec = '';
+
+    for (int i = 0; i <= currentUV; i++) {
+      if (mediumRecString(i - 1) != mediumRecString(i))
+        rec += (" " + mediumRecString(i));
+    }
+    return rec;
+  }
+
+  mediumRecString(int currentUV) {
     switch (currentUV) {
       case 0:
         return MediumRecommendations.zero;
@@ -417,10 +534,10 @@ class UVInfo extends StatelessWidget {
         break;
 
       case 2:
-        return MediumRecommendations.twoAndThree;
+        return MediumRecommendations.two;
         break;
       case 3:
-        return MediumRecommendations.twoAndThree;
+        return MediumRecommendations.three;
         break;
       case 4:
         return MediumRecommendations.four;
@@ -431,7 +548,6 @@ class UVInfo extends StatelessWidget {
       case 6:
         return MediumRecommendations.six;
         break;
-
       case 7:
         return MediumRecommendations.seven;
         break;
@@ -442,12 +558,25 @@ class UVInfo extends StatelessWidget {
         return MediumRecommendations.nine;
         break;
       case 10:
-        return MediumRecommendations.tenAndEleven;
+        return MediumRecommendations.ten;
+        break;
+      case 10:
+        return MediumRecommendations.eleven;
         break;
     }
   }
 
   oliveMainRec(int currentUV) {
+    String rec = '';
+
+    for (int i = 0; i <= currentUV; i++) {
+      if (oliveRecString(i - 1) != oliveRecString(i))
+        rec += (" " + oliveRecString(i));
+    }
+    return rec;
+  }
+
+  oliveRecString(int currentUV) {
     switch (currentUV) {
       case 0:
         return OliveRecommendations.zero;
@@ -470,7 +599,6 @@ class UVInfo extends StatelessWidget {
       case 6:
         return OliveRecommendations.six;
         break;
-
       case 7:
         return OliveRecommendations.seven;
         break;
@@ -484,9 +612,6 @@ class UVInfo extends StatelessWidget {
         return OliveRecommendations.ten;
         break;
       case 11:
-        return OliveRecommendations.eleven;
-        break;
-      default:
         return OliveRecommendations.eleven;
         break;
     }

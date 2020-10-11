@@ -27,31 +27,31 @@ class UVIndexDescriptions {
 
 class UVClothingRecommendations {
   static const zero = "Wear whatever you like!";
-  static const one = "Shorts and Shirts Acceptable with Sunglasses.";
-  static const two = "Shorts and Shirts Acceptable with Sunglasses.";
-  static const three = "Shorts and Shirts Acceptable with Sunglasses.";
+  static const one = "Shorts and shirts with sunglasses.";
+  static const two = "Shorts and shirts with sunglasses.";
+  static const three = "Shorts and shirts with sunglasses.";
   static const four =
-      "Shorts and Shirts Acceptable (with applied sunscreen) and Sunglasses with a Large Brim Hat.";
+      "Shorts and shirts (with applied sunscreen) and sunglasses with a large brim hat.";
   static const five =
-      "Shorts and Shirts Acceptable (with applied sunscreen) and Sunglasses with a Large Brim Hat.";
+      "Shorts and shirts (with applied sunscreen) and sunglasses with a large brim hat.";
   static const six =
-      "Long-sleeved Shirts and Pants provide optimum protection with Sunglasses and a Large Brim Hat.";
+      "Long-sleeved shirts and pants provide optimum protection with sunglasses and a large brim hat.";
   static const seven =
-      "Long-sleeved Shirts and Pants provide optimum protection with Sunglasses and a Large Brim Hat.";
+      "Long-sleeved shirts and pants provide optimum protection with sunglasses and a large brim hat.";
   static const eight =
-      "Long-sleeved Shirts and Pants provide optimum protection with Sunglasses and a Large Brim Hat.";
+      "Long-sleeved shirts and pants provide optimum protection with sunglasses and a large brim hat.";
   static const nine =
-      "Long-sleeved Shirts and Pants provide optimum protection (with applied sunscreen to face, neck, and ears) and Sunglasses with a Large Brim Hat.";
+      "Long-sleeved shirts and pants provide optimum protection (with applied sunscreen to face, neck, and ears) and sunglasses with a large brim hat.";
   static const ten =
-      "Long-sleeved Shirts and Pants provide optimum protection (with applied sunscreen to face, neck, and ears) and Sunglasses with a Large Brim Hat.";
+      "Long-sleeved shirts and pants provide optimum protection (with applied sunscreen to face, neck, and ears) and sunglasses with a large brim hat.";
   static const eleven =
-      "Long-sleeved Shirts and Pants provide optimum protection (with applied sunscreen to face, neck, and ears) and Sunglasses with a Large Brim Hat.";
+      "Long-sleeved shirts and pants provide optimum protection (with applied sunscreen to face, neck, and ears) and sunglasses with a large brim hat.";
 }
 
 class FairRecommendations {
   static const zero = "Enjoy your time outside!";
   static const one =
-      "Wear sunglasses (Look for labels that say, \"100% protection against both UVA and UVB\"";
+      "Wear sunglasses (Look for labels that say, \"100% protection against both UVA and UVB\".";
   static const two =
       "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
   static const three = "Take precautions, such as covering while outside.";
@@ -64,7 +64,9 @@ class FairRecommendations {
   static const eight = "Seek shade while outside.";
   static const nine =
       "Take extra precautions; Unprotected skin will be damaged and can burn quickly.";
-  static const tenAndEleven =
+  static const ten =
+      "Take all precautions; Unprotected skin can burn in minutes.";
+  static const eleven =
       "Take all precautions; Unprotected skin can burn in minutes.";
 }
 
@@ -72,7 +74,9 @@ class MediumRecommendations {
   static const zero = "Enjoy your time outside!";
   static const one =
       "Wear sunglasses (Look for labels that say, \"100% protection against both UVA and UVB\"";
-  static const twoAndThree =
+  static const two =
+      "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
+  static const three =
       "Apply sunscreen (reapply every 2 hours, after sweating/swimming, or as directed om the package) and use protective clothing (UPF).";
   static const four = "Take precautions, such as covering while outside.";
 
@@ -84,7 +88,9 @@ class MediumRecommendations {
   static const eight = "Seek shade while outside.";
   static const nine =
       "Take extra precautions; Unprotected skin will be damaged and can burn quickly.";
-  static const tenAndEleven =
+  static const ten =
+      "Take all precautions; Unprotected skin can burn in minutes.";
+  static const eleven =
       "Take all precautions; Unprotected skin can burn in minutes.";
 }
 

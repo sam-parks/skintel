@@ -138,6 +138,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 )),
           ],
         ),
+        Spacer(),
+        Center(
+            child: Image.asset(
+          'assets/images/sun.png',
+        )),
+        Spacer()
       ],
     );
   }
