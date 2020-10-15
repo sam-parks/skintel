@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
@@ -55,6 +53,7 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -80,7 +79,7 @@ class _MyAppState extends State<MyApp> {
   _getArticles() async {
     List<Article> articles = await _articleService.getArticles();
 
-    int index = Random().nextInt(articles.length - 1);
+    int index = DateTime.now().day % (articles.length - 1);
     Article dailyArticle = articles[index];
     articles.remove(index);
 
@@ -181,8 +180,10 @@ class _SkinColorSelectionPageState extends State<SkinColorSelectionPage> {
             child: Text(
               determineSkinDescription(skinColorIndexSelected),
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(color: Colors.black, fontFamily: kFontFamilyNormal),
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: kFontFamilyNormal,
+              ),
             ),
           ),
           Container(

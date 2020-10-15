@@ -17,7 +17,6 @@ class UVInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UVModel uvModel = Provider.of<UVModel>(context);
-    print(uvModel.currentUV);
     CityModel cityModel = Provider.of<CityModel>(context);
     SkinColorModel skinColorModel = Provider.of<SkinColorModel>(context);
     UVData sunrise;
@@ -129,15 +128,16 @@ class UVInfo extends StatelessWidget {
                           child: Text(
                             "Recommendations",
                             style: TextStyle(
-                                fontFamily: kFontFamilyBold, fontSize: 24),
+                                fontFamily: kFontFamilyBold, fontSize: 26),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
                             "Follow these suggestions to keep your skin protected.",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontFamily: kFontFamilyNormal, fontSize: 10),
+                                fontFamily: kFontFamilyNormal, fontSize: 16),
                           ),
                         ),
                         Padding(
@@ -147,19 +147,18 @@ class UVInfo extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.amber,
                                 fontFamily: kFontFamilyBold,
-                                fontSize: 16),
+                                fontSize: 22),
                           ),
                         ),
                         Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 8.0, left: 8.0, right: 8.0),
-                            child: AutoSizeText(
-                                mainRecommendation(skinColorModel, uvModel),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: kFontFamilyBold, fontSize: 14)),
-                          ),
+                              padding: const EdgeInsets.only(
+                                  bottom: 8.0, left: 8.0, right: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:
+                                    mainRecommendation(skinColorModel, uvModel),
+                              )),
                         ),
                         if (uvModel.currentUV >= 1.0)
                           Padding(
@@ -169,7 +168,7 @@ class UVInfo extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.amber,
                                   fontFamily: kFontFamilyBold,
-                                  fontSize: 16),
+                                  fontSize: 22),
                             ),
                           ),
                         if (uvModel.currentUV >= 1.0)
@@ -181,7 +180,7 @@ class UVInfo extends StatelessWidget {
                                   spfRecommendation(skinColorModel),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 20,
                                     fontFamily: kFontFamilyBold,
                                   )),
                             ),
@@ -191,11 +190,21 @@ class UVInfo extends StatelessWidget {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text(
-                              "*More time spent in the sun means that you will need more applications of sunscreen. 1 oz of the applied sunscreen on an adult body is the minimum requirement to attain the SPF outlined on the package.",
+                              "*More time spent in the sun means that you will need more applications of sunscreen.",
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: kFontFamilyNormal, fontSize: 10),
+                                  fontFamily: kFontFamilyNormal, fontSize: 16),
                             ),
                           ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "*1 oz of the applied sunscreen on an adult body is the minimum requirement to attain the SPF outlined on the package.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: kFontFamilyNormal, fontSize: 16),
+                          ),
+                        ),
                         if (skinColorModel.hoursOutdoors != null)
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -204,7 +213,7 @@ class UVInfo extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.amber,
                                   fontFamily: kFontFamilyBold,
-                                  fontSize: 16),
+                                  fontSize: 22),
                             ),
                           ),
                         if (skinColorModel.hoursOutdoors != null)
@@ -215,7 +224,7 @@ class UVInfo extends StatelessWidget {
                               child: AutoSizeText(sunscreenRec(skinColorModel),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 20,
                                     fontFamily: kFontFamilyBold,
                                   )),
                             ),
@@ -225,7 +234,8 @@ class UVInfo extends StatelessWidget {
                           child: Text(
                             "*Thick, pastier sunscreens are more likely to cause acne by clogging pores, so be aware of the sunscreen consistency.",
                             style: TextStyle(
-                                fontFamily: kFontFamilyNormal, fontSize: 10),
+                                fontFamily: kFontFamilyNormal, fontSize: 16),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                         Padding(
@@ -235,7 +245,7 @@ class UVInfo extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.amber,
                                 fontFamily: kFontFamilyBold,
-                                fontSize: 16),
+                                fontSize: 22),
                           ),
                         ),
                         Flexible(
@@ -246,7 +256,7 @@ class UVInfo extends StatelessWidget {
                                 clothingRec(uvModel.currentUV.toInt()),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 20,
                                   fontFamily: kFontFamilyBold,
                                 )),
                           ),
@@ -256,7 +266,8 @@ class UVInfo extends StatelessWidget {
                           child: Text(
                             "*Skin can still burn through very lightweight clothing materials.",
                             style: TextStyle(
-                                fontFamily: kFontFamilyNormal, fontSize: 10),
+                                fontFamily: kFontFamilyNormal, fontSize: 16),
+                            textAlign: TextAlign.center,
                           ),
                         )
                       ],
@@ -331,18 +342,22 @@ class UVInfo extends StatelessWidget {
         return "Non-comedogenic lotions";
         break;
       case 2:
-        return "Creams or lotions, avoid sprays and gels";
+        return "Light-weight, noncomedogenic, lotion formulations";
         break;
       case 3:
-        return "Light-weight, noncomedogenic, lotion formulation";
+        return "Creams or lotions, avoid sprays and gels";
         break;
       case 4:
+        return "Lotions, creams or sprays";
+        break;
+      case 5:
         return "Lotions, creams or sprays";
         break;
     }
   }
 
-  mainRecommendation(SkinColorModel skinColorModel, UVModel uvModel) {
+  List<Widget> mainRecommendation(
+      SkinColorModel skinColorModel, UVModel uvModel) {
     int currentUV = uvModel.currentUV.toInt();
 
     switch (skinColorModel.skinColorIndex) {
@@ -352,7 +367,6 @@ class UVInfo extends StatelessWidget {
       case 1:
         return paleMainRec(currentUV);
         break;
-
       case 2:
         return mediumMainRec(currentUV);
         break;
@@ -363,17 +377,32 @@ class UVInfo extends StatelessWidget {
         return darkMainRec(currentUV);
         break;
       default:
+        return paleMainRec(currentUV);
     }
   }
 
-  paleMainRec(int currentUV) {
-    String rec = '';
+  List<Widget> paleMainRec(int currentUV) {
+    if (currentUV == 0) {
+      return [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("Enjoy your time outside!",
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        )
+      ];
+    }
+
+    List<Widget> recs = [];
 
     for (int i = 0; i <= currentUV; i++) {
       if (paleRecString(i - 1) != paleRecString(i))
-        rec += (" " + paleRecString(i));
+        recs.add(Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("• " + paleRecString(i),
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        ));
     }
-    return rec;
+    return recs;
   }
 
   paleRecString(uv) {
@@ -464,13 +493,27 @@ class UVInfo extends StatelessWidget {
   }
 
   darkMainRec(int currentUV) {
-    String rec = '';
+    if (currentUV == 0) {
+      return [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("Enjoy your time outside!",
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        )
+      ];
+    }
+
+    List<Widget> recs = [];
 
     for (int i = 0; i <= currentUV; i++) {
       if (darkRecString(i - 1) != darkRecString(i))
-        rec += (" " + darkRecString(i));
+        recs.add(Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("• " + darkRecString(i),
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        ));
     }
-    return rec;
+    return recs;
   }
 
   darkRecString(int currentUV) {
@@ -515,13 +558,27 @@ class UVInfo extends StatelessWidget {
   }
 
   mediumMainRec(int currentUV) {
-    String rec = '';
+    if (currentUV == 0) {
+      return [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("Enjoy your time outside!",
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        )
+      ];
+    }
+
+    List<Widget> recs = [];
 
     for (int i = 0; i <= currentUV; i++) {
       if (mediumRecString(i - 1) != mediumRecString(i))
-        rec += (" " + mediumRecString(i));
+        recs.add(Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("• " + mediumRecString(i),
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        ));
     }
-    return rec;
+    return recs;
   }
 
   mediumRecString(int currentUV) {
@@ -567,13 +624,27 @@ class UVInfo extends StatelessWidget {
   }
 
   oliveMainRec(int currentUV) {
-    String rec = '';
+    if (currentUV == 0) {
+      return [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("Enjoy your time outside!",
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        )
+      ];
+    }
+
+    List<Widget> recs = [];
 
     for (int i = 0; i <= currentUV; i++) {
       if (oliveRecString(i - 1) != oliveRecString(i))
-        rec += (" " + oliveRecString(i));
+        recs.add(Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Text("• " + oliveRecString(i),
+              style: TextStyle(fontFamily: kFontFamilyBold, fontSize: 16))),
+        ));
     }
-    return rec;
+    return recs;
   }
 
   oliveRecString(int currentUV) {

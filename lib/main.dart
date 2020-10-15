@@ -55,7 +55,7 @@ getSavedSkinType() async {
 
 class _ProdConfig extends Config {
   @override
-  String get openUVAPIKey => "a0a2514b3b7d2ca6dd73ab2a7ed7473a";
+  String get openUVAPIKey => "f2c20f763e6ce7ca714fcade6588ab68";
   @override
   String get placesAPIKey => 'AIzaSyClRg3sNZj5GSbsnOiZ11Qz7-faFrNTKNA';
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -112,10 +113,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     borderRadius: BorderRadius.circular(8)),
                 margin: const EdgeInsets.all(8),
                 child: ListTile(
-                  title: Text("Complexion",
-                      style: TextStyle(fontFamily: kFontFamilyNormal)),
-                  trailing: _complexionDropdown(),
-                )),
+                    title: AutoSizeText("Complexion",
+                        maxLines: 1,
+                        style: TextStyle(fontFamily: kFontFamilyNormal)),
+                    trailing: Container(
+                      child: _complexionDropdown(),
+                    ))),
             Container(
                 decoration: BoxDecoration(
                     color: Colors.amber,
@@ -203,37 +206,44 @@ class _SettingsPageState extends State<SettingsPage> {
         items: [
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(0),
-              value: "Acne and Dry",
+              value: determineSkinTypeText(0),
               child: Text(
-                "Acne and Dry",
+                determineSkinTypeText(0),
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(1),
-              value: "Acne and Oily",
+              value: determineSkinTypeText(1),
               child: Text(
-                "Acne and Oily",
+                determineSkinTypeText(1),
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(2),
-              value: "No Acne and Dry",
+              value: determineSkinTypeText(2),
               child: Text(
-                "No Acne and Dry",
+                determineSkinTypeText(2),
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(3),
-              value: "No Acne and Oily",
+              value: determineSkinTypeText(3),
               child: Text(
-                "No Acne and Oily",
+                determineSkinTypeText(3),
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinTypeIndex(4),
-              value: "No Acne",
+              value: determineSkinTypeText(4),
               child: Text(
-                "No Acne",
+                determineSkinTypeText(4),
+                style: TextStyle(fontFamily: kFontFamilyNormal),
+              )),
+          DropdownMenuItem(
+              onTap: () => skinColorModel.updateSkinTypeIndex(5),
+              value: determineSkinTypeText(5),
+              child: Text(
+                determineSkinTypeText(5),
                 style: TextStyle(fontFamily: kFontFamilyNormal),
               )),
         ],
@@ -273,10 +283,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
+                    child: AutoSizeText(
                       determineSkinDescription(0),
+                      maxLines: 2,
                       style: TextStyle(
-                          fontFamily: kFontFamilyNormal, fontSize: 10),
+                          fontFamily: kFontFamilyNormal, fontSize: 12),
                     ),
                   )
                 ],
@@ -284,35 +295,38 @@ class _SettingsPageState extends State<SettingsPage> {
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinColorIndex(1),
               value: "Fair",
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: Text(
-                          "Fair",
-                          style: TextStyle(fontFamily: kFontFamilyBold),
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Text(
+                            "Fair",
+                            style: TextStyle(fontFamily: kFontFamilyBold),
+                          ),
                         ),
-                      ),
-                      SkinColorCircle(
-                        skinColorIndex: 1,
-                        selected: false,
-                        updateSkinColorForParent: () {},
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      determineSkinDescription(1),
-                      style: TextStyle(
-                          fontFamily: kFontFamilyNormal, fontSize: 10),
+                        SkinColorCircle(
+                          skinColorIndex: 1,
+                          selected: false,
+                          updateSkinColorForParent: () {},
+                        ),
+                      ],
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: AutoSizeText(
+                        determineSkinDescription(1),
+                        maxLines: 2,
+                        style: TextStyle(
+                            fontFamily: kFontFamilyNormal, fontSize: 12),
+                      ),
+                    )
+                  ],
+                ),
               )),
           DropdownMenuItem(
               onTap: () => skinColorModel.updateSkinColorIndex(2),
@@ -342,7 +356,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Text(
                       determineSkinDescription(2),
                       style: TextStyle(
-                          fontFamily: kFontFamilyNormal, fontSize: 10),
+                          fontFamily: kFontFamilyNormal, fontSize: 12),
                     ),
                   )
                 ],
@@ -375,7 +389,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Text(
                       determineSkinDescription(3),
                       style: TextStyle(
-                          fontFamily: kFontFamilyNormal, fontSize: 10),
+                          fontFamily: kFontFamilyNormal, fontSize: 12),
                     ),
                   )
                 ],
@@ -408,7 +422,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Text(
                       determineSkinDescription(4),
                       style: TextStyle(
-                          fontFamily: kFontFamilyNormal, fontSize: 10),
+                          fontFamily: kFontFamilyNormal, fontSize: 12),
                     ),
                   )
                 ],
@@ -429,15 +443,18 @@ String determineSkinTypeText(int index) {
       return "Acne and Oily";
       break;
     case 2:
-      return "No Acne and Dry";
+      return "Oily";
       break;
     case 3:
-      return "No Acne and Oily";
+      return "Dry";
       break;
     case 4:
-      return "No Acne";
+      return "Combination Skin";
+      break;
+    case 5:
+      return "Normal Skin";
       break;
     default:
-      return "No Acne";
+      return "Normal Skin";
   }
 }

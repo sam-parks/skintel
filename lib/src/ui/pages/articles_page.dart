@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -62,7 +61,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
               }
 
               if (index == 1) {
-                return articleOfTheDay(articlesModel.articles[index]);
+                return articleOfTheDay(articlesModel.dailyArticle);
               }
 
               return GestureDetector(
@@ -142,8 +141,8 @@ class _ArticlesPageState extends State<ArticlesPage> {
             child: Card(
               elevation: 5,
               child: Container(
-                height: 190,
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -187,7 +186,8 @@ class _ArticlesPageState extends State<ArticlesPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 5, bottom: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 4),
                       child: RichText(
                         text: TextSpan(
                             text: "Reference: ",

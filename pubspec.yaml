@@ -37,9 +37,11 @@ dependencies:
   google_maps_flutter: ^0.5.25+3
 
 
+
   # FORMATTING
   auto_size_text: ^2.1.0
   intl: ^0.16.1
+  flutter_markdown: ^0.4.4
 
   # Utilities
   shared_preferences: ^0.5.8
